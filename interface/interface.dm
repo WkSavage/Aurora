@@ -37,7 +37,7 @@
 
 /client/verb/github()
 	set name = "github"
-	set desc = "Visit the Aurorastation Github page, where bugs and issues can be reported!"
+	set desc = "Visit the Hollowstation Github page, where bugs and issues can be reported! If it is an AuroraStation issue, post it on their respective GitHub."
 	set hidden = 1
 	if ( config.githuburl )
 		if(alert("This will open the Github Issues page in your browser. Are you sure?",,"Yes","No")=="No")

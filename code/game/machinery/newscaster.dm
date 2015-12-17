@@ -416,7 +416,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<FONT COLOR='maroon'>Unable to print newspaper. Insufficient paper. Please notify maintenance personnel to refill machine storage.</FONT><BR><BR>"
 				dat+="<A href='?src=\ref[src];setScreen=[0]'>Return</A>"
 			if(22)
-				dat += "<div align='center'><b>Station Directives<br>NanoTrasen<br>NSS Aurora</b></div><br>"
+				dat += "<div align='center'><b>Station Directives<br>NanoTrasen<br>NTC Hollowstone</b></div><br>"
 
 				establish_db_connection()
 				if(!dbcon.IsConnected())
@@ -457,7 +457,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat += "<div align='center'><a href='?src=\ref[src];setScreen=[0]'>Return to Main Menu</a></div>"
 			if(24)
 				dat += "<div align='center'><b>Regarding Station Directives</b></div><hr>"
-				dat += "<div align='justify'>The Station Directives are a set of specific orders and directives issued and enforced aboard a specific NanoTrasen Corporation installation. This terminal provides access to orders and directives enforced aboard the <i>NSS Aurora.</i> Note that these are only enforced upon NanoTrasen Employees, and not civilians or visitors, unless ruled otherwise by sector specific Central Command.<br><br>"
+				dat += "<div align='justify'>The Station Directives are a set of specific orders and directives issued and enforced aboard a specific NanoTrasen Corporation installation. This terminal provides access to orders and directives enforced aboard the <i>NTC Hollowstone.</i> Note that these are only enforced upon NanoTrasen Employees, and not civilians or visitors, unless ruled otherwise by sector specific Central Command.<br><br>"
 				dat += "Overwriting power of general NanoTrasen Corporate Regulation is given to the Station Directives. Should a conflict emerge, the Station Directives active aboard the specific installation are to be adhered to, over Corporate Regulation.<br><br>"
 				dat += "Punishment for a violation of Station Directives should be escalated in the following fashion:<br><ul><li>Verbal warning, and citation. Ensure that the Employee is familiar with the Station Directives.</li><li>Charge of violating article i111 - Failure to Execute an Order - of NanoTrasen Corporate Regulation</li><li>Subsequent charge of violating article i206 - Neglect of Duty - of NanoTrasen Corporate Regulation, and review of Employee by the Employee's Head of Staff.</li><li>Subsequent failure to follow Station Directives should result in suspension of contract, if not imprisonment until transfer to Central Command station.</li></ul>"
 				dat += "Dependant on the violation and actual crimes concerned, punishment may be escalated faster, with intent to ensure in the safety of station, equipment and crew.<br>"

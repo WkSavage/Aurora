@@ -10,7 +10,7 @@
 
 /obj/structure/santa_signup_box
 	name = "Secret Santa Sign-up Box"
-	desc = "Sign up to participate in NSS Aurora secret santa extravaganza here!"
+	desc = "Sign up to participate in NTC Hollowstone secret santa extravaganza here!"
 	anchored = 1
 	density = 1
 
@@ -77,11 +77,11 @@
 				dat += "<br><br><br><center><b><font color='red'>Christmas is over! Go home, scrub!</font></b></center>"
 			if (STATUS_SIGNUP)
 				if (isSignedUp(M))
-					dat += "<center><b>You are currently signed up to participate in the NSS Aurora secret santa extravaganza!</b></center><br><br>"
+					dat += "<center><b>You are currently signed up to participate in the NTC Hollowstone secret santa extravaganza!</b></center><br><br>"
 					dat += "<center>You have [daysLeft] days left to change your mind, should you want to!</center><br>"
 					dat += "<center><font color='red'><a href='?src=\ref[src];choice=withdraw;user=\ref[user]'>Withdraw Participation</a></font></center>"
 				else
-					dat += "<center><b>You are currently not signed up to participate in the NSS Aurora secret santa extravaganza!</b></center><br><br>"
+					dat += "<center><b>You are currently not signed up to participate in the NTC Hollowstone secret santa extravaganza!</b></center><br><br>"
 					dat += "<center>You have [daysLeft] days left to sign up!</center><br>"
 					dat += "<center><font color='green'><a href='?src=\ref[src];choice=signup;user=\ref[user]'>Sign up to participate!</a></font></center>"
 
@@ -94,7 +94,7 @@
 
 						dat += "<center>Your mark is: <b>[hasMark(M)]</b>!</center><br>"
 						dat += "<center>Figure out what they may like for Christmas, and submit the idea for NanoTrasen approval!</center><br>"
-						dat += "<center>Your mark is a [markInfo["character_gender"]] [markInfo["character_species"]] working aboard the NSS Aurora as a [markInfo["character_job"]]. They like [markInfo["character_like"]].</center><br><br>"
+						dat += "<center>Your mark is a [markInfo["character_gender"]] [markInfo["character_species"]] working aboard the NTC Hollowstone as a [markInfo["character_job"]]. They like [markInfo["character_like"]].</center><br><br>"
 
 						if (markInfo["assigned_gift"])
 							dat += "<center>You are giving them a [markInfo["assigned_gift"]]. <a href='?src=\ref[src];choice=reviseGift;user=\ref[user]'>Revise</a></center>"
@@ -171,7 +171,7 @@
 	if (!query.Execute())
 		user << "\red Something went wrong! Give this error to the coders: [query.ErrorMsg()]."
 	else
-		user << "\blue You are now signed up for the NSS Aurora secret santa extravaganza! Return here after the 18th of December to find out who your mark is!"
+		user << "\blue You are now signed up for the NTC Hollowstone secret santa extravaganza! Return here after the 18th of December to find out who your mark is!"
 
 	return
 
