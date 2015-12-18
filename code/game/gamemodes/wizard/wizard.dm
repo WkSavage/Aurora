@@ -1,7 +1,7 @@
 
 /datum/game_mode
 	var/list/datum/mind/wizards = list()
-
+/*
 /datum/game_mode/wizard
 	name = "wizard"
 	config_tag = "wizard"
@@ -12,7 +12,8 @@
 
 	uplink_welcome = "Wizardly Uplink Console:"
 	uplink_uses = 10
-
+*/
+/datum/game_mode/wizard
 	var/finished = 0
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)

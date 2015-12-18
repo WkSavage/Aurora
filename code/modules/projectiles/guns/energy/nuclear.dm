@@ -136,7 +136,7 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_delay = 2
-	charge_cost = 150 //How much energy is needed to fire.
+	charge_cost = 100 //How much energy is needed to fire.
 	projectile_type = "/obj/item/projectile/energy/electrode"
 	origin_tech = "combat=2;magnets=1"
 	modifystate = "epistolstun"
@@ -158,7 +158,7 @@
 				modifystate = "epistolkill"
 			if(1)
 				mode = 0
-				charge_cost = 150
+				charge_cost = 50
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/energy/electrode"
