@@ -5,7 +5,7 @@
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
-	charge_cost = 100
+	charge_cost = 170
 	projectile_type = "/obj/item/projectile/energy/electrode/high"
 	cell_type = "/obj/item/weapon/cell/crap"
 
@@ -17,11 +17,11 @@
 	desc = "A small, low capacity gun used for non-lethal takedowns."
 	icon_state = "taser"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	charge_cost = 100
+	charge_cost = 120
 	projectile_type = "/obj/item/projectile/energy/electrode/high"
 	cell_type = "/obj/item/weapon/cell/secborg"
 	var/charge_tick = 0
-	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
+	var/recharge_time = 20 //Time it takes for shots to recharge (in ticks)
 
 	New()
 		..()
@@ -56,7 +56,7 @@
 	icon_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
-	charge_cost = 125
+	charge_cost = 150
 	projectile_type = "/obj/item/projectile/energy/electrode/high"
 	cell_type = "/obj/item/weapon/cell"
 

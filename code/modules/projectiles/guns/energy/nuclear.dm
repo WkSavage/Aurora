@@ -158,7 +158,7 @@
 				modifystate = "epistolkill"
 			if(1)
 				mode = 0
-				charge_cost = 150
+				charge_cost = 50
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/energy/electrode"
