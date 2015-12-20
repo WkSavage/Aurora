@@ -440,7 +440,7 @@ See code\modules\mob\new_player\preferences_setup.dm for where it's used.
 	poison_type = "oxygen"
 	insulated = 1
 
-	flags = NO_SCAN
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
