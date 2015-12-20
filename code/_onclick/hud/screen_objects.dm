@@ -284,14 +284,6 @@
 								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
 								tankcheck = list (H.s_store, C.back, H.belt, C.r_hand, C.l_hand, H.l_store, H.r_store)
 
-							if(istype(C.back,/obj/item/rig))
-								var/obj/item/rig = C.back
-								var/from = "on"
-								if(rig.air_supply)
-									from = "in"
-									nicename |= "hardsuit"
-									tankcheck |= rig.air_supply
-
 							else
 
 								nicename = list("Right Hand", "Left Hand", "Back")
@@ -400,8 +392,8 @@
 		if("Toggle Sensor Augmentation")
 			if(isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-				R.sensor_mode()
-
+				R.sensor_mode()			
+				
 		if("module1")
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(1)
@@ -471,7 +463,7 @@
 
 		if("Toggle Gun Mode")
 			usr.client.ToggleGunMode()
-
+			
 
 		if("AI Core")
 			if(isAI(usr))
@@ -544,12 +536,12 @@
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
 				AI.aiCamera.viewpictures()
-
+				
 		if("Set Sensor Augmentation")
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
 				AI.sensor_mode()
-
+			
 		else
 			return 0
 	return 1

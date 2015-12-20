@@ -43,8 +43,6 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 	var/contained_sprite = 0 //1 if item_state, lefthand, righthand, and worn sprite are all in one dmi
 
-	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
-
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
@@ -181,7 +179,7 @@
 	user.put_in_active_hand(src)
 	return
 
-
+	
 /obj/item/equip_robot(mob/user as mob)
 	if (istype(src.loc, /obj/item/weapon/robot_module))
 		//If the item is part of a cyborg module, equip it
@@ -190,7 +188,7 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 		return TRUE
-
+	
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu
 /obj/item/attackby(obj/item/weapon/W as obj, mob/user as mob)

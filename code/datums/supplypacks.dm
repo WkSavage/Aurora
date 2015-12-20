@@ -1290,7 +1290,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/hardsuitcrate_s
 	name = "Security Hardsuit Crate"
-	contains = list(/obj/item/rig/hazard)
+	contains = list(/obj/item/clothing/head/helmet/space/rig/security,
+					/obj/item/clothing/suit/space/rig/security)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
 	containername = "security hardsuit kit"
@@ -1299,7 +1300,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/hardsuitcrate_m
 	name = "Medical Hardsuit Crate"
-	contains = list(/obj/item/rig/medical)
+	contains = list(/obj/item/clothing/head/helmet/space/rig/medical,
+					/obj/item/clothing/suit/space/rig/medical)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical hardsuit kit"
@@ -1308,7 +1310,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/hardsuitcrate_a
 	name = "Atmospherics Hardsuit"
-	contains = list(/obj/item/rig/eva)
+	contains = list(/obj/item/clothing/head/helmet/space/rig/atmos,
+					/obj/item/clothing/suit/space/rig/atmos)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
 	containername = "atmospherics hardsuit kit"

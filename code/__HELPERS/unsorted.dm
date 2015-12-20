@@ -734,7 +734,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 			return 0
 
 	return 1
-
+	
 // this works like do_after but needs the target to stay still as well
 /proc/do_after_to_target(var/mob/user as mob, target, delay as num, var/numticks = 5, var/needhand = 1)
 	var/target_original_turf = get_turf(target)
@@ -742,7 +742,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		if (get_turf(target)==target_original_turf)
 			return TRUE
 	return FALSE
-
+	
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
@@ -976,6 +976,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
 					O.vars[V] = original.vars[V]
 	return O
+
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating

@@ -102,13 +102,13 @@
 		return 1
 	return 0
 
-
+	
 /mob/proc/drop_item_if_in_either_hand(var/obj/item/W,var/atom/Target)
 	if (l_hand==W)
 		return drop_l_hand(Target)
 	if (r_hand==W)
 		return drop_r_hand(Target)
-
+		
 
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(var/atom/Target)
@@ -152,6 +152,14 @@
 /mob/proc/drop_item(var/atom/Target)
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
+
+
+
+
+
+
+
+
 
 //TODO: phase out this proc
 /mob/proc/before_take_item(var/obj/item/W)	//TODO: what is this?

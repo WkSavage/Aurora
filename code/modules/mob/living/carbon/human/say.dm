@@ -251,6 +251,7 @@
 		return GetSpecialVoice()
 	return real_name
 
+
 /mob/living/carbon/human/proc/SetSpecialVoice(var/new_voice)
 	if(new_voice)
 		special_voice = new_voice

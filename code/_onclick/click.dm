@@ -43,7 +43,7 @@
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
-
+	
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -63,33 +63,33 @@
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
 		return
-
+		
 	if(stat || paralysis || stunned || weakened)
 		return
-
+		
 	face_atom(A) // change direction to face what you clicked on
 
 	if(!AllowedToMoveAgain())
 		return
-
+	
 	AllowedToClickAgainAfter(1) // prevent very speedy click spam
-
+	
 	if(istype(loc,/obj/mecha))
 		if(!locate(/turf) in list(A,A.loc)) // Prevents inventory from being drilled
 			return
 		var/obj/mecha/M = loc
 		return M.click_action(A,src)
-
+		
 	if(restrained())
 		AllowedToClickAgainAfter(CLICK_CD_HANDCUFFED)
 		RestrainedClickOn(A)
 		return
-
+		
 	if(in_throw_mode)
 		AllowedToClickAgainAfter(CLICK_CD_THROW)
 		throw_item(A)
 		return
-
+		
 	var/obj/item/W = get_active_hand()
 
 	if(W == A)
@@ -100,9 +100,6 @@
 		else
 			update_inv_r_hand(0)
 
-		return
-
-	if(!canClick()) // in the year 2000...
 		return
 
 	// operate two STORAGE levels deep here (item in backpack in src; NOT item in box in backpack in src)
@@ -125,7 +122,7 @@
 			AllowedToClickAgainAfter(CLICK_CD_MELEE)
 			UnarmedAttack(A)
 		return
-
+		
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
@@ -152,10 +149,10 @@
 
 /mob/proc/AllowedToMoveAgain()
 	return next_move <= world.time
-
+	
 /mob/proc/AllowedToClickAgainAfter(num)
 	next_move = world.time + num
-
+	
 /mob/proc/DelayClickByWeaponFlag(var/obj/item/W) // if the weapon has the USEDELAY flag, increase the next_move by five
 	if(W.flags&USEDELAY)
 		next_move += 5
@@ -177,11 +174,6 @@
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
-
-/mob/proc/canClick()
-	if(config.no_click_cooldown || next_move <= world.time)
-		return 1
-	return 0
 
 /*
 	Ranged unarmed attack:
