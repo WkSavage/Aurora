@@ -94,11 +94,7 @@
 
 						dat += "<center>Your mark is: <b>[D.name]</b>!</center><br>"
 						dat += "<center>Figure out what they may like for Christmas, and submit the idea for NanoTrasen approval!</center><br>"
-<<<<<<< HEAD
-						dat += "<center>Your mark is a [markInfo["character_gender"]] [markInfo["character_species"]] working aboard the NTC Hollowstone as a [markInfo["character_job"]]. They like [markInfo["character_like"]].</center><br><br>"
-=======
-						dat += "<center>Your mark is a [D.gender] [D.species] working aboard the NSS Aurora as a [D.job]. They like [D.like].</center><br><br>"
->>>>>>> ed4481c... Secret Santa - Assinging People + Fixes
+						dat += "<center>Your mark is a [D.gender] [D.species] working aboard the NTC Hollowstone as a [D.job]. They like [D.like].</center><br><br>"
 
 						if (D.gift)
 							dat += "<center>You are giving them a [D.gift]. <a href='?src=\ref[src];choice=reviseGift;user=\ref[user]'>Revise</a></center>"
@@ -182,7 +178,7 @@
 	if (!query.Execute())
 		user << "\red Something went wrong! Give this error to the coders: [query.ErrorMsg()]."
 	else
-		user << "\blue You are now signed up for the NTC Hollowstone secret santa extravaganza! Return here after the 18th of December to find out who your mark is!"
+		user << "\blue You are now signed up for the NSS Aurora secret santa extravaganza! Return here after the 18th of December to find out who your mark is!"
 
 	return
 
