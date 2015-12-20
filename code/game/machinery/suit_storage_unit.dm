@@ -757,16 +757,6 @@
 			user << "The cycler already contains a hardsuit."
 			return
 
-		var/obj/item/clothing/suit/space/rig/S = I
-
-		if(S.helmet)
-			user << "\The [S] will not fit into the cycler with a helmet attached."
-			return
-
-		if(S.boots)
-			user << "\The [S] will not fit into the cycler with boots attached."
-			return
-
 		user << "You fit \the [I] into the suit cycler."
 		user.drop_item()
 		I.loc = src

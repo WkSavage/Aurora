@@ -197,14 +197,6 @@
 							H.spell_list += new /obj/effect/proc_holder/spell/aoe_turf/conjure/construct(H)
 							temp = "Soul Stone Shards are ancient tools capable of capturing and harnessing the spirits of the dead and dying. The spell Artificer allows you to create arcane machines for the captured souls to pilot."
 							max_uses--
-						if("armor")
-							feedback_add_details("wizard_spell_learned","HS") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							new /obj/item/clothing/shoes/sandal(get_turf(H)) //In case they've lost them.
-							new /obj/item/clothing/gloves/purple(get_turf(H))//To complete the outfit
-							new /obj/item/clothing/suit/space/rig/wizard(get_turf(H))
-							new /obj/item/clothing/head/helmet/space/rig/wizard(get_turf(H))
-							temp = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
-							max_uses--
 						if("staffanimation")
 							feedback_add_details("wizard_spell_learned","SA") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/weapon/gun/energy/staff/animate(get_turf(H))

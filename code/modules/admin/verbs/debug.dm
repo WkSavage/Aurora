@@ -1095,13 +1095,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			tac_uniform.webbing = new /obj/item/clothing/tie/storage/black_vest(tac_uniform)
 			M.equip_to_slot_or_del(tac_uniform, slot_w_uniform)
 
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/rig/merc(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/syndicate(M), slot_l_ear)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/night(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/syndicate(M), slot_wear_mask)
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi(M), slot_head)
 
 			var/obj/item/weapon/storage/belt/security/tactical/tac_belt = new(M)
 			tac_belt.contents += new /obj/item/ammo_magazine/a12mm
