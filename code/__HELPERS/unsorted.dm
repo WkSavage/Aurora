@@ -42,7 +42,6 @@
 	if(A > upper) return 0
 	return 1
 
-
 /proc/Get_Angle(atom/movable/start,atom/movable/end)//For beams.
 	if(!start || !end) return 0
 	var/dy
@@ -734,7 +733,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 			return 0
 
 	return 1
-	
+
 // this works like do_after but needs the target to stay still as well
 /proc/do_after_to_target(var/mob/user as mob, target, delay as num, var/numticks = 5, var/needhand = 1)
 	var/target_original_turf = get_turf(target)
@@ -742,7 +741,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		if (get_turf(target)==target_original_turf)
 			return TRUE
 	return FALSE
-	
+
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.

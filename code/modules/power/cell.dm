@@ -52,7 +52,6 @@
 	charge += amount_used
 	return amount_used
 
-
 /obj/item/weapon/cell/examine()
 	set src in view(1)
 	if(usr /*&& !usr.stat*/)
@@ -89,15 +88,15 @@
 			message_mods("[user.name] ([user.ckey]) injected a power cell with plasma, rigging it to explode.")
 
 		S.reagents.clear_reagents()
-		
+
 	if(istype(W,/obj/item/device/assembly_holder))
 		var/obj/item/device/assembly_holder/holder = W
 		if(istype(holder.a_left,/obj/item/device/assembly/signaler) && istype(holder.a_right,/obj/item/device/assembly/signaler))
 			user << "<span class='notice'>You make an improvised signal jammer from \the [holder].</span>"
 			new /obj/item/device/radiojammer/improvised(holder,src,user)
-			
-			
-		
+
+
+
 /obj/item/weapon/cell/proc/explode()
 	var/turf/T = get_turf(src.loc)
 /*
@@ -193,3 +192,4 @@
 			return min(rand(10,20),rand(10,20))
 		else
 			return 0
+-
