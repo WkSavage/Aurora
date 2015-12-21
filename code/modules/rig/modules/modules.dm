@@ -8,7 +8,7 @@
 	var/product_type = "undefined"
 	var/charges = 0
 
-/obj/item/rig_module
+/obj/item/rig/module
 	name = "hardsuit upgrade"
 	desc = "It looks pretty sciency."
 	icon = 'icons/obj/rig_modules.dmi'
@@ -54,7 +54,7 @@
 
 	var/list/stat_rig_module/stat_modules = new()
 
-/obj/item/rig_module/examine()
+/obj/item/rig/module/examine()
 	..()
 	switch(damage)
 		if(0)
@@ -64,7 +64,7 @@
 		if(2)
 			usr << "It is almost completely destroyed."
 
-/obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rig/module/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/stack/nanopaste))
 
@@ -83,8 +83,7 @@
 		paste.use(1)
 		return
 
-	else if(istype(W,/obj/item/stack/cable_coil))
-
+	else if(istype(W,/obj/item/weapon/cable_coil))
 		switch(damage)
 			if(0)
 				user << "There is no damage to mend."
@@ -93,22 +92,21 @@
 				user << "There is no damage that you are capable of mending with such crude tools."
 				return
 
-		var/obj/item/stack/cable_coil/cable = W
-		if(!cable.amount >= 5)
-			user << "You need five units of cable to repair \the [src]."
+		var/obj/item/weapon/cable_coil = W
+		if(!W.amount >= 5)
+		user << "You need five units of cable to repair \the [src]."
 			return
-
 		user << "You start mending the damaged portions of \the [src]..."
 		if(!do_after(user,30) || !W || !src)
 			return
 
 		damage = 1
 		user << "You mend some of damage to [src] with [W], but you will need more advanced tools to fix it completely."
-		cable.use(5)
+		W.use(5)
 		return
 	..()
 
-/obj/item/rig_module/New()
+/obj/item/rig/module/New()
 	..()
 	if(suit_overlay_inactive)
 		suit_overlay = suit_overlay_inactive
@@ -135,12 +133,12 @@
 	stat_modules +=	new/stat_rig_module/charge(src)
 
 // Called when the module is installed into a suit.
-/obj/item/rig_module/proc/installed(var/obj/item/rig/new_holder)
+/obj/item/rig/module/proc/installed(var/obj/item/rig/new_holder)
 	holder = new_holder
 	return
 
 //Proc for one-use abilities like teleport.
-/obj/item/rig_module/proc/engage()
+/obj/item/rig/module/proc/engage()
 
 	if(damage >= 2)
 		usr << "<span class='warning'>The [interface_name] is damaged beyond use!</span>"
@@ -174,7 +172,7 @@
 	return 1
 
 // Proc for toggling on active abilities.
-/obj/item/rig_module/proc/activate()
+/obj/item/rig/module/proc/activate()
 
 	if(active || !engage())
 		return 0
@@ -191,7 +189,7 @@
 	return 1
 
 // Proc for toggling off active abilities.
-/obj/item/rig_module/proc/deactivate()
+/obj/item/rig/module/proc/deactivate()
 
 	if(!active)
 		return 0
@@ -209,13 +207,13 @@
 	return 1
 
 // Called when the module is uninstalled from a suit.
-/obj/item/rig_module/proc/removed()
+/obj/item/rig/module/proc/removed()
 	deactivate()
 	holder = null
 	return
 
 // Called by the hardsuit each rig process tick.
-/obj/item/rig_module/process()
+/obj/item/rig/module/process()
 	if(active)
 		return active_power_cost
 	else
@@ -223,7 +221,7 @@
 
 // Called by holder rigsuit attackby()
 // Checks if an item is usable with this module and handles it if it is
-/obj/item/rig_module/proc/accepts_item(var/obj/item/input_device)
+/obj/item/rig/module/proc/accepts_item(var/obj/item/input_device)
 	return 0
 
 /mob/living/carbon/human/Stat()
@@ -233,11 +231,11 @@
 		var/obj/item/rig/R = back
 		SetupStat(R)
 
-/mob/proc/SetupStat(var/obj/item/rig/R)
+/mob/proc/SetupStat(var/obj/item/rig/R, var/cell = /obj/item/weapon/cell/high, var/CP = /obj/item/weapon/cell/proc/percent(), var/CFC = /obj/item/weapon/cell/proc/fully_charged())
 	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
-		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
+		var/cell_status = cell ? "[CP]/[CFC]" : "ERROR"
 		stat("Suit charge", cell_status)
-		for(var/obj/item/rig_module/module in R.installed_modules)
+		for(var/obj/item/rig/module/module in R.installed_modules)
 		{
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())
@@ -247,9 +245,9 @@
 /stat_rig_module
 	parent_type = /atom/movable
 	var/module_mode = ""
-	var/obj/item/rig_module/module
+	var/obj/item/rig/module/module
 
-/stat_rig_module/New(var/obj/item/rig_module/module)
+/stat_rig_module/New(var/obj/item/rig/module/module)
 	..()
 	src.module = module
 
@@ -271,7 +269,7 @@
 /stat_rig_module/DblClick()
 	return Click()
 
-/stat_rig_module/activate/New(var/obj/item/rig_module/module)
+/stat_rig_module/activate/New(var/obj/item/rig/module/module)
 	..()
 	name = module.activate_string
 	if(module.active_power_cost)
@@ -281,7 +279,7 @@
 /stat_rig_module/activate/CanUse()
 	return module.toggleable && !module.active
 
-/stat_rig_module/deactivate/New(var/obj/item/rig_module/module)
+/stat_rig_module/deactivate/New(var/obj/item/rig/module/module)
 	..()
 	name = module.deactivate_string
 	// Show cost despite being 0, if it means changing from an active cost.
@@ -293,7 +291,7 @@
 /stat_rig_module/deactivate/CanUse()
 	return module.toggleable && module.active
 
-/stat_rig_module/engage/New(var/obj/item/rig_module/module)
+/stat_rig_module/engage/New(var/obj/item/rig/module/module)
 	..()
 	name = module.engage_string
 	if(module.use_power_cost)

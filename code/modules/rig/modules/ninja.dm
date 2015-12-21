@@ -1,12 +1,12 @@
 /*
  * Contains
- * /obj/item/rig_module/stealth_field
- * /obj/item/rig_module/teleporter
- * /obj/item/rig_module/fabricator/energy_net
- * /obj/item/rig_module/self_destruct
+ * /obj/item/rig/module/stealth_field
+ * /obj/item/rig/module/teleporter
+ * /obj/item/rig/module/fabricator/energy_net
+ * /obj/item/rig/module/self_destruct
  */
 
-/obj/item/rig_module/stealth_field
+/obj/item/rig/module/stealth_field
 
 	name = "active camouflage module"
 	desc = "A robust hardsuit-integrated stealth module."
@@ -30,7 +30,7 @@
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
 
-/obj/item/rig_module/stealth_field/activate()
+/obj/item/rig/module/stealth_field/activate()
 
 	if(!..())
 		return 0
@@ -44,7 +44,7 @@
 
 	H.visible_message("[H.name] vanishes into thin air!",1)
 
-/obj/item/rig_module/stealth_field/deactivate()
+/obj/item/rig/module/stealth_field/deactivate()
 
 	if(!..())
 		return 0
@@ -62,7 +62,7 @@
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
 
-/obj/item/rig_module/teleporter
+/obj/item/rig/module/teleporter
 
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
@@ -77,7 +77,7 @@
 	interface_name = "VOID-shift phase projector"
 	interface_desc = "An advanced teleportation system. It is capable of pinpoint precision or random leaps forward."
 
-/obj/item/rig_module/teleporter/proc/phase_in(var/mob/M,var/turf/T)
+/obj/item/rig/module/teleporter/proc/phase_in(var/mob/M,var/turf/T)
 
 	if(!M || !T)
 		return
@@ -87,7 +87,7 @@
 	playsound(T, 'sound/effects/sparks2.ogg', 50, 1)
 	anim(T,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
 
-/obj/item/rig_module/teleporter/proc/phase_out(var/mob/M,var/turf/T)
+/obj/item/rig/module/teleporter/proc/phase_out(var/mob/M,var/turf/T)
 
 	if(!M || !T)
 		return
@@ -95,7 +95,7 @@
 	playsound(T, "sparks", 50, 1)
 	anim(T,M,'icons/mob/mob.dmi',,"phaseout",,M.dir)
 
-/obj/item/rig_module/teleporter/engage(atom/target)
+/obj/item/rig/module/teleporter/engage(atom/target)
 
 	if(!..()) return 0
 
@@ -119,9 +119,6 @@
 		H << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
 		return 0
 
-	if(T.contains_dense_objects())
-		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
-
 	phase_out(H,get_turf(H))
 	H.forceMove(T)
 	phase_in(H,get_turf(H))
@@ -134,8 +131,8 @@
 
 	return 1
 
-/obj/item/rig_module/fabricator/energy_net
-
+/*
+/obj/item/rig/module/fabricator/energy_net
 	name = "net projector"
 	desc = "Some kind of complex energy projector with a hardsuit mount."
 	icon_state = "enet"
@@ -148,7 +145,7 @@
 	fabrication_type = /obj/item/weapon/energy_net
 	use_power_cost = 70
 
-/obj/item/rig_module/fabricator/energy_net/engage(atom/target)
+/obj/item/rig/module/fabricator/energy_net/engage(atom/target)
 
 	if(holder && holder.wearer)
 		if(..(target) && target)
@@ -156,7 +153,7 @@
 		return 1
 	return 0
 
-/obj/item/rig_module/self_destruct
+/obj/item/rig/module/self_destruct
 
 	name = "self-destruct module"
 	desc = "Oh my God, Captain. A bomb."
@@ -170,13 +167,13 @@
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated self-destruct module. When the wearer dies, so does the surrounding area. Do not press this button."
 
-/obj/item/rig_module/self_destruct/activate()
+/obj/item/rig/module/self_destruct/activate()
 	return
 
-/obj/item/rig_module/self_destruct/deactivate()
+/obj/item/rig/module/self_destruct/deactivate()
 	return
 
-/obj/item/rig_module/self_destruct/process()
+/obj/item/rig/module/self_destruct/process()
 
 	// Not being worn, leave it alone.
 	if(!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
@@ -186,16 +183,17 @@
 	if(holder.wearer.stat == 2)
 		engage()
 
-/obj/item/rig_module/self_destruct/engage()
+/obj/item/rig/module/self_destruct/engage()
 	explosion(get_turf(src), 1, 2, 4, 5)
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
 		qdel(holder)
 	qdel(src)
 
-/obj/item/rig_module/self_destruct/small/engage()
+/obj/item/rig/module/self_destruct/small/engage()
 	explosion(get_turf(src), 0, 0, 3, 4)
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
 		qdel(holder)
 	qdel(src)
+*/

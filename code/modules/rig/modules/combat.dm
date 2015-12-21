@@ -1,13 +1,13 @@
 /*
  * Contains
- * /obj/item/rig_module/grenade_launcher
- * /obj/item/rig_module/mounted
- * /obj/item/rig_module/mounted/taser
- * /obj/item/rig_module/shield
- * /obj/item/rig_module/fabricator
+ * /obj/item/rig/module/grenade_launcher
+ * /obj/item/rig/module/mounted
+ * /obj/item/rig/module/mounted/taser
+ * /obj/item/rig/module/shield
+ * /obj/item/rig/module/fabricator
  */
 
-/obj/item/rig_module/grenade_launcher
+/obj/item/rig/module/grenade_launcher
 
 	name = "mounted grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser."
@@ -26,7 +26,7 @@
 		list("EMP grenade", "EMP grenade", /obj/item/weapon/grenade/empgrenade, 3),
 		)
 
-/obj/item/rig_module/grenade_launcher/accepts_item(var/obj/item/input_device, var/mob/living/user)
+/obj/item/rig/module/grenade_launcher/accepts_item(var/obj/item/input_device, var/mob/living/user)
 
 	if(!istype(input_device) || !istype(user))
 		return 0
@@ -47,11 +47,11 @@
 
 	user << "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>"
 	user.drop_from_inventory(input_device)
-	qdel(input_device)
+	del(input_device)
 	accepted_item.charges++
 	return 1
 
-/obj/item/rig_module/grenade_launcher/engage(atom/target)
+/obj/item/rig/module/grenade_launcher/engage(atom/target)
 
 	if(!..())
 		return 0
@@ -80,7 +80,8 @@
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
 
-/obj/item/rig_module/mounted
+/*
+/obj/item/rig/module/mounted
 
 	name = "mounted laser cannon"
 	desc = "A shoulder-mounted battery-powered laser cannon mount."
@@ -97,11 +98,11 @@
 	var/gun_type = /obj/item/weapon/gun/energy/lasercannon/mounted
 	var/obj/item/weapon/gun/gun
 
-/obj/item/rig_module/mounted/New()
+/obj/item/rig/module/mounted/New()
 	..()
 	gun = new gun_type(src)
 
-/obj/item/rig_module/mounted/engage(atom/target)
+/obj/item/rig/module/mounted/engage(atom/target)
 
 	if(!..())
 		return 0
@@ -113,7 +114,7 @@
 	gun.Fire(target,holder.wearer)
 	return 1
 
-/obj/item/rig_module/mounted/egun
+/obj/item/rig/module/mounted/egun
 
 	name = "mounted energy gun"
 	desc = "A forearm-mounted energy projector."
@@ -124,7 +125,7 @@
 
 	gun_type = /obj/item/weapon/gun/energy/gun/mounted
 
-/obj/item/rig_module/mounted/taser
+/obj/item/rig/module/mounted/taser
 
 	name = "mounted taser"
 	desc = "A palm-mounted nonlethal energy projector."
@@ -140,7 +141,7 @@
 
 	gun_type = /obj/item/weapon/gun/energy/taser/mounted
 
-/obj/item/rig_module/mounted/energy_blade
+/obj/item/rig/module/mounted/energy_blade
 
 	name = "energy blade projector"
 	desc = "A powerful cutting beam projector."
@@ -161,7 +162,7 @@
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
 
-/obj/item/rig_module/mounted/energy_blade/process()
+/obj/item/rig/module/mounted/energy_blade/process()
 
 	if(holder && holder.wearer)
 		if(!(locate(/obj/item/weapon/melee/energy/blade) in holder.wearer))
@@ -170,7 +171,7 @@
 
 	return ..()
 
-/obj/item/rig_module/mounted/energy_blade/activate()
+/obj/item/rig/module/mounted/energy_blade/activate()
 
 	..()
 
@@ -185,7 +186,7 @@
 	blade.creator = M
 	M.put_in_hands(blade)
 
-/obj/item/rig_module/mounted/energy_blade/deactivate()
+/obj/item/rig/module/mounted/energy_blade/deactivate()
 
 	..()
 
@@ -198,7 +199,7 @@
 		M.drop_from_inventory(blade)
 		qdel(blade)
 
-/obj/item/rig_module/fabricator
+/obj/item/rig/module/fabricator
 
 	name = "matter fabricator"
 	desc = "A self-contained microfactory system for hardsuit integration."
@@ -216,7 +217,7 @@
 	var/fire_force = 30
 	var/fire_distance = 10
 
-/obj/item/rig_module/fabricator/engage(atom/target)
+/obj/item/rig/module/fabricator/engage(atom/target)
 
 	if(!..())
 		return 0
@@ -238,3 +239,5 @@
 			H.put_in_hands(new_weapon)
 
 	return 1
+*/
+

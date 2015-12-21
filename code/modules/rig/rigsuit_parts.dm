@@ -8,9 +8,36 @@
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
-	brightness_on = 4
+	var/brightness_on = 4
 	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/helmet.dmi',"Skrell" = 'icons/mob/species/skrell/helmet.dmi',"Unathi" = 'icons/mob/species/unathi/helmet.dmi')
 	species_restricted = null
+
+	var/light_overlay = "helmet_light"
+	var/light_applied
+	var/on = 0
+
+	attack_self(mob/user)
+		if(!isturf(user.loc))
+			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
+			return
+		on = !on
+		icon_state = "hardhat[on]_[item_color]"
+		item_state = "hardhat[on]_[item_color]"
+
+		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
+		else	user.SetLuminosity(user.luminosity - brightness_on)
+
+	pickup(mob/user)
+		if(on)
+			user.SetLuminosity(user.luminosity + brightness_on)
+//			user.UpdateLuminosity()	//TODO: Carn
+			SetLuminosity(0)
+
+	dropped(mob/user)
+		if(on)
+			user.SetLuminosity(user.luminosity - brightness_on)
+//			user.UpdateLuminosity()
+			SetLuminosity(brightness_on)
 
 /obj/item/rig/hand
 	name = "Gauntlets"
@@ -28,7 +55,7 @@
 	heat_protection = FEET
 	species_restricted = null
 	gender = PLURAL
-	icon_base = null
+	var/icon_base = null
 
 /obj/item/rig/chest
 	name = "Chestpiece"
@@ -40,11 +67,11 @@
 	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
 	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
-	breach_threshold = 38
-	resilience = 0.2
-	can_breach = 1
+	var/breach_threshold = 38
+	var/resilience = 0.2
+	var/can_breach = 1
+	var/supporting_limbs = list()
 	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi')
-	supporting_limbs = list()
 
 /obj/item/rig/head/proc/prevent_track()
 	return 0
@@ -61,7 +88,7 @@
 	if(!suit || !istype(suit) || !suit.installed_modules.len)
 		return 0
 
-	for(var/obj/item/rig_module/module in suit.installed_modules)
+	for(var/obj/item/rig/module/module in suit.installed_modules)
 		if(module.active && module.activates_on_touch)
 			if(module.engage(A))
 				return 1

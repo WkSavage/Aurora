@@ -34,7 +34,7 @@
 	var/helm_type = /obj/item/rig/head
 	var/boot_type = /obj/item/rig/foot
 	var/glove_type = /obj/item/rig/hand
-	var/cell_type = /obj/item/weapon/cell/high
+	var/cell_type = /obj/item/rig/cell
 	var/air_type = /obj/item/weapon/tank/oxygen
 
 	//Component/device holders.
@@ -43,10 +43,10 @@
 	var/obj/item/rig/head = null            // Deployable helmet, if any.
 	var/obj/item/rig/hand = null            // Deployable gauntlets, if any.
 	var/air_supply = /obj/item/weapon/tank/oxygen             // Air tank, if any.
-	var/cell = /obj/item/weapon/cell/high                     // Power supply, if any.
-	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
-	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
-	var/obj/item/rig_module/voice/speech                      // As above.
+	var/cell = /obj/item/rig/cell                             // Power supply, if any.
+	var/obj/item/rig/module/selected_module = null            // Primary system (used with middle-click)
+	var/obj/item/rig/module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
+	var/obj/item/rig/module/voice/speech                      // As above.
 	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
 	var/image/mob_icon                                        // Holder for on-mob icon.
 	var/list/installed_modules = list()                       // Power consumption/use bookkeeping.
@@ -63,7 +63,6 @@
 	var/malfunction_delay = 0
 	var/electrified = 0
 	var/locked_down = 0
-
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
@@ -73,10 +72,89 @@
 	var/airtight = 1 //If set, will adjust AIRTIGHT and STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
 	var/emp_protection = 0
 
+
+//For clothing checks
+	var/list/species_restricted = null
+	var/list/sprite_sheets_refit = null
+
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
 	var/datum/effect/effect/system/spark_spread/spark_system
 
+
+//Updates the icons of the mob wearing the clothing item, if any.
+/obj/item/rig/proc/update_clothing_icon()
+	return
+
+//BS12: Species-restricted clothing check.
+/obj/item/rig/mob_can_equip(M as mob, slot)
+
+	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
+	if (!..())
+		return 0
+
+	if(species_restricted && istype(M,/mob/living/carbon/human))
+
+		var/wearable = null
+		var/exclusive = null
+		var/mob/living/carbon/human/H = M
+
+		if("exclude" in species_restricted)
+			exclusive = 1
+
+		if(H.species)
+			if(exclusive)
+				if(!(H.species.name in species_restricted))
+					wearable = 1
+			else
+				if(H.species.name in species_restricted)
+					wearable = 1
+
+			if(!wearable && (slot != 15 && slot != 16)) //Pockets.
+				M << "\red Your species cannot wear [src]."
+				return 0
+
+	return 1
+
+/obj/item/rig/proc/refit_for_species(var/target_species)
+	//Set species_restricted list
+	switch(target_species)
+		if("Human", "Skrell")	//humanoid bodytypes
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		else
+			species_restricted = list(target_species)
+
+	//Set icon
+	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
+		icon_override = sprite_sheets_refit[target_species]
+	else
+		icon_override = initial(icon_override)
+
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
+
+/obj/item/rig/head/refit_for_species(var/target_species)
+	//Set species_restricted list
+	switch(target_species)
+		if("Skrell")
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
+		else
+			species_restricted = list(target_species)
+
+	//Set icon
+	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
+		icon_override = sprite_sheets_refit[target_species]
+	else
+		icon_override = initial(icon_override)
+
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
 
 /obj/item/rig/examine()
 	usr << "This is \icon[src][src.name]."
@@ -109,7 +187,7 @@
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
-			var/obj/item/rig_module/module = new path(src)
+			var/obj/item/rig/module/module = new path(src)
 			installed_modules += module
 			module.installed(src)
 
@@ -278,7 +356,7 @@
 	M << "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>"
 
 	if(canremove)
-		for(var/obj/item/rig_module/module in installed_modules)
+		for(var/obj/item/rig/module/module in installed_modules)
 			module.deactivate()
 	if(airtight)
 		update_component_sealed()
@@ -327,7 +405,7 @@
 
 	if(offline)
 		if(offline == 1)
-			for(var/obj/item/rig_module/module in installed_modules)
+			for(var/obj/item/rig/module/module in installed_modules)
 				module.deactivate()
 			offline = 2
 			chest.slowdown = offline_slowdown
@@ -342,10 +420,10 @@
 		malfunctioning--
 		malfunction()
 
-	for(var/obj/item/rig_module/module in installed_modules)
+	for(var/obj/item/rig/module/module in installed_modules)
 		R.cell.use(module.process()*10)
 
-/obj/item/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai, var/obj/item/rig/R, var/charge(10000))
+/obj/item/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig/module/mod, var/user_is_ai, var/obj/item/rig/cell)
 	if(!istype(user))
 		return 0
 
@@ -363,7 +441,7 @@
 		fail_msg = "<span class='warning'>You are in no fit state to do that."
 	else if(!cell)
 		fail_msg = "<span class='warning'>There is no cell installed in the suit.</span>"
-	else if(cost && R.cell.charge < cost * 10) //TODO: Cellrate?
+	else if(cost && cell.charge < cost * 10) //TODO: Cellrate?
 		fail_msg = "<span class='warning'>Not enough stored power.</span>"
 
 	if(fail_msg)
@@ -372,14 +450,14 @@
 
 	// This is largely for cancelling stealth and whatever.
 	if(mod && mod.disruptive)
-		for(var/obj/item/rig_module/module in (installed_modules - mod))
+		for(var/obj/item/rig/module/module in (installed_modules - mod))
 			if(module.active && module.disruptable)
 				module.deactivate()
 
-	R.cell.use(cost*10)
+	cell.use(cost*10)
 	return 1
 
-/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = inventory_state, var/obj/item/rig/R)
+/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/obj/item/rig/R)
 	if(!user)
 		return
 
@@ -413,7 +491,7 @@
 
 	var/list/module_list = list()
 	var/i = 1
-	for(var/obj/item/rig_module/module in installed_modules)
+	for(var/obj/item/rig/module/module in installed_modules)
 		var/list/module_data = list(
 			"index" =             i,
 			"name" =              "[module.interface_name]",
@@ -449,25 +527,23 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550, state = nano_state)
+		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/rig/update_icon(var/update_mob_icon)
-
-	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
+/obj/item/rig/update_icon(var/update_mob_icon, var/datum/species)
 	overlays.Cut()
 	if(!mob_icon || update_mob_icon)
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype()])
-			species_icon =  sprite_sheets[wearer.species.get_bodytype()]
+		if(wearer && sprite_sheets && sprite_sheets[wearer])
+			species_icon =  sprite_sheets[wearer]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if(installed_modules.len)
-		for(var/obj/item/rig_module/module in installed_modules)
+		for(var/obj/item/rig/module/module in installed_modules)
 			if(module.suit_overlay)
 				chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
 
@@ -515,7 +591,7 @@
 		var/module_index = text2num(href_list["interact_module"])
 
 		if(module_index > 0 && module_index <= installed_modules.len)
-			var/obj/item/rig_module/module = installed_modules[module_index]
+			var/obj/item/rig/module/module = installed_modules[module_index]
 			switch(href_list["module_mode"])
 				if("activate")
 					module.activate()
@@ -540,7 +616,7 @@
 /obj/item/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
 		return
-	for(var/obj/item/rig_module/module in installed_modules)
+	for(var/obj/item/rig/module/module in installed_modules)
 		for(var/mob/living/silicon/ai/ai in module.contents)
 			if(ai && ai.client && !ai.stat)
 				ai << "[message]"
@@ -562,8 +638,8 @@
 		wearer = M
 		update_icon()
 
-/obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode, var/obj/item/rig/R, var/charge = 10000)
-	if(sealing || !cell || !R.cell.charge)
+/obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
+	if(sealing || !cell || !cell.charge)
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
@@ -700,8 +776,6 @@
 
 	var/chance
 	if(!is_emp)
-		chance = 2*max(0, damage - (chest? chest.breach_threshold : 0))
-	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
 		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
@@ -713,13 +787,13 @@
 	//This way the chances of a module being disabled aren't so remote.
 	var/list/valid_modules = list()
 	var/list/damaged_modules = list()
-	for(var/obj/item/rig_module/module in installed_modules)
+	for(var/obj/item/rig/module/module in installed_modules)
 		if(module.damage < 2)
 			valid_modules |= module
 			if(module.damage > 0)
 				damaged_modules |= module
 
-	var/obj/item/rig_module/dam_module = null
+	var/obj/item/rig/module/dam_module = null
 	if(damaged_modules.len)
 		dam_module = pick(damaged_modules)
 	else if(valid_modules.len)

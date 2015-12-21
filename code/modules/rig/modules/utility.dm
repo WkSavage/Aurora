@@ -1,20 +1,20 @@
 /* Contains:
- * /obj/item/rig_module/device
- * /obj/item/rig_module/device/plasmacutter
- * /obj/item/rig_module/device/healthscanner
- * /obj/item/rig_module/device/drill
- * /obj/item/rig_module/device/orescanner
- * /obj/item/rig_module/device/rcd
- * /obj/item/rig_module/device/anomaly_scanner
- * /obj/item/rig_module/maneuvering_jets
- * /obj/item/rig_module/foam_sprayer
- * /obj/item/rig_module/device/broadcaster
- * /obj/item/rig_module/chem_dispenser
- * /obj/item/rig_module/chem_dispenser/injector
- * /obj/item/rig_module/voice
+ * /obj/item/rig/module/device
+ * /obj/item/rig/module/device/plasmacutter
+ * /obj/item/rig/module/device/healthscanner
+ * /obj/item/rig/module/device/drill
+ * /obj/item/rig/module/device/orescanner
+ * /obj/item/rig/module/device/rcd
+ * /obj/item/rig/module/device/anomaly_scanner
+ * /obj/item/rig/module/maneuvering_jets
+ * /obj/item/rig/module/foam_sprayer
+ * /obj/item/rig/module/device/broadcaster
+ * /obj/item/rig/module/chem_dispenser
+ * /obj/item/rig/module/chem_dispenser/injector
+ * /obj/item/rig/module/voice
  */
 
-/obj/item/rig_module/device
+/obj/item/rig/module/device
 	name = "mounted device"
 	desc = "Some kind of hardsuit mount."
 	usable = 0
@@ -25,7 +25,7 @@
 	var/device_type
 	var/obj/item/device
 
-/obj/item/rig_module/device/plasmacutter
+/obj/item/rig/module/device/plasmacutter
 	name = "hardsuit plasma cutter"
 	desc = "A lethal-looking industrial cutter."
 	icon_state = "plasmacutter"
@@ -36,7 +36,7 @@
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
-/obj/item/rig_module/device/healthscanner
+/obj/item/rig/module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
 	icon_state = "scanner"
@@ -45,7 +45,7 @@
 
 	device_type = /obj/item/device/healthanalyzer
 
-/obj/item/rig_module/device/drill
+/obj/item/rig/module/device/drill
 	name = "hardsuit drill mount"
 	desc = "A very heavy diamond-tipped drill."
 	icon_state = "drill"
@@ -56,7 +56,7 @@
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
-/obj/item/rig_module/device/anomaly_scanner
+/obj/item/rig/module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
 	desc = "You think it's called an Elder Sarsparilla or something."
 	icon_state = "eldersasparilla"
@@ -67,7 +67,7 @@
 	selectable = 0
 	device_type = /obj/item/device/ano_scanner
 
-/obj/item/rig_module/device/orescanner
+/obj/item/rig/module/device/orescanner
 	name = "ore scanner module"
 	desc = "A clunky old ore scanner."
 	icon_state = "scanner"
@@ -77,8 +77,8 @@
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/weapon/mining_scanner
-
-/obj/item/rig_module/device/rcd
+/*
+/obj/item/rig/module/device/rcd
 	name = "RCD mount"
 	desc = "A cell-powered rapid construction device for a hardsuit."
 	icon_state = "rcd"
@@ -89,11 +89,11 @@
 
 	device_type = /obj/item/weapon/rcd/mounted
 
-/obj/item/rig_module/device/New()
+/obj/item/rig/module/device/New()
 	..()
 	if(device_type) device = new device_type(src)
 
-/obj/item/rig_module/device/engage(atom/target)
+/obj/item/rig/module/device/engage(atom/target)
 
 	if(!..() || !device)
 		return 0
@@ -111,9 +111,9 @@
 		device.afterattack(target,holder.wearer,1)
 	return 1
 
+*/
 
-
-/obj/item/rig_module/chem_dispenser
+/obj/item/rig/module/chem_dispenser
 	name = "mounted chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 	icon_state = "injector"
@@ -140,7 +140,7 @@
 
 	var/max_reagent_volume = 80 //Used when refilling.
 
-/obj/item/rig_module/chem_dispenser/ninja
+/obj/item/rig/module/chem_dispenser/ninja
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant is made to be extremely light and flexible."
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
@@ -155,7 +155,7 @@
 		list("radium",        "radium",        0, 20)
 		)
 
-/obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
+/obj/item/rig/module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
 
 	if(!input_item.is_open_container())
 		return 0
@@ -188,7 +188,7 @@
 		user << "<span class='danger'>None of the reagents seem suitable.</span>"
 	return 1
 
-/obj/item/rig_module/chem_dispenser/engage(atom/target)
+/obj/item/rig/module/chem_dispenser/engage(atom/target)
 
 	if(!..())
 		return 0
@@ -230,7 +230,7 @@
 
 	return 1
 
-/obj/item/rig_module/chem_dispenser/combat
+/obj/item/rig/module/chem_dispenser/combat
 
 	name = "combat chemical injector"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
@@ -246,7 +246,7 @@
 	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
 
 
-/obj/item/rig_module/chem_dispenser/injector
+/obj/item/rig/module/chem_dispenser/injector
 
 	name = "mounted chemical injector"
 	desc = "A complex web of tubing and a large needle suitable for hardsuit use."
@@ -257,8 +257,8 @@
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
 
-/obj/item/rig_module/voice
-
+/*
+/obj/item/rig/module/voice
 	name = "hardsuit voice synthesiser"
 	desc = "A speaker box and sound processor."
 	icon_state = "megaphone"
@@ -274,16 +274,16 @@
 
 	var/obj/item/voice_changer/voice_holder
 
-/obj/item/rig_module/voice/New()
+/obj/item/rig/module/voice/New()
 	..()
 	voice_holder = new(src)
 	voice_holder.active = 0
 
-/obj/item/rig_module/voice/installed()
+/obj/item/rig/module/voice/installed()
 	..()
 	holder.speech = src
 
-/obj/item/rig_module/voice/engage()
+/obj/item/rig/module/voice/engage()
 
 	if(!..())
 		return 0
@@ -310,7 +310,7 @@
 			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 
-/obj/item/rig_module/maneuvering_jets
+/obj/item/rig/module/maneuvering_jets
 
 	name = "hardsuit maneuvering jets"
 	desc = "A compact gas thruster system for a hardsuit."
@@ -332,13 +332,13 @@
 
 	var/obj/item/weapon/tank/jetpack/rig/jets
 
-/obj/item/rig_module/maneuvering_jets/engage()
+/obj/item/rig/module/maneuvering_jets/engage()
 	if(!..())
 		return 0
 	jets.toggle_rockets()
 	return 1
 
-/obj/item/rig_module/maneuvering_jets/activate()
+/obj/item/rig/module/maneuvering_jets/activate()
 
 	if(active)
 		return 0
@@ -356,25 +356,27 @@
 		jets.toggle()
 	return 1
 
-/obj/item/rig_module/maneuvering_jets/deactivate()
+/obj/item/rig/module/maneuvering_jets/deactivate()
 	if(!..())
 		return 0
 	if(jets.on)
 		jets.toggle()
 	return 1
 
-/obj/item/rig_module/maneuvering_jets/New()
+/obj/item/rig/module/maneuvering_jets/New()
 	..()
 	jets = new(src)
 
-/obj/item/rig_module/maneuvering_jets/installed()
+/obj/item/rig/module/maneuvering_jets/installed()
 	..()
 	jets.holder = holder
 	jets.ion_trail.set_up(holder)
 
-/obj/item/rig_module/maneuvering_jets/removed()
+/obj/item/rig/module/maneuvering_jets/removed()
 	..()
 	jets.holder = null
 	jets.ion_trail.set_up(jets)
 
-/obj/item/rig_module/foam_sprayer
+/obj/item/rig/module/foam_sprayer
+
+*/

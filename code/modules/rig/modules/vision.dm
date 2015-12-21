@@ -1,12 +1,12 @@
 /*
  * Contains
- * /obj/item/rig_module/vision
- * /obj/item/rig_module/vision/multi
- * /obj/item/rig_module/vision/meson
- * /obj/item/rig_module/vision/thermal
- * /obj/item/rig_module/vision/nvg
- * /obj/item/rig_module/vision/medhud
- * /obj/item/rig_module/vision/sechud
+ * /obj/item/rig/module/vision
+ * /obj/item/rig/module/vision/multi
+ * /obj/item/rig/module/vision/meson
+ * /obj/item/rig/module/vision/thermal
+ * /obj/item/rig/module/vision/nvg
+ * /obj/item/rig/module/vision/medhud
+ * /obj/item/rig/module/vision/sechud
  */
 
 /datum/rig_vision
@@ -38,7 +38,7 @@
 /datum/rig_vision/medhud/New()
 	glasses = new /obj/item/clothing/glasses/hud/health
 
-/obj/item/rig_module/vision
+/obj/item/rig/module/vision
 
 	name = "hardsuit visor"
 	desc = "A layered, translucent visor system for a hardsuit."
@@ -64,7 +64,7 @@
 
 	var/vision_index
 
-/obj/item/rig_module/vision/multi
+/obj/item/rig/module/vision/multi
 
 	name = "hardsuit optical package"
 	desc = "A complete visor system of optical scanners and vision modes."
@@ -80,7 +80,7 @@
 						/datum/rig_vision/sechud,
 						/datum/rig_vision/medhud)
 
-/obj/item/rig_module/vision/meson
+/obj/item/rig/module/vision/meson
 
 	name = "hardsuit meson scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
@@ -93,7 +93,7 @@
 
 	vision_modes = list(/datum/rig_vision/meson)
 
-/obj/item/rig_module/vision/thermal
+/obj/item/rig/module/vision/thermal
 
 	name = "hardsuit thermal scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
@@ -106,7 +106,7 @@
 
 	vision_modes = list(/datum/rig_vision/thermal)
 
-/obj/item/rig_module/vision/nvg
+/obj/item/rig/module/vision/nvg
 
 	name = "hardsuit night vision interface"
 	desc = "A multi input night vision system for a hardsuit."
@@ -119,7 +119,7 @@
 
 	vision_modes = list(/datum/rig_vision/nvg)
 
-/obj/item/rig_module/vision/sechud
+/obj/item/rig/module/vision/sechud
 
 	name = "hardsuit security hud"
 	desc = "A simple tactical information system for a hardsuit."
@@ -132,7 +132,7 @@
 
 	vision_modes = list(/datum/rig_vision/sechud)
 
-/obj/item/rig_module/vision/medhud
+/obj/item/rig/module/vision/medhud
 
 	name = "hardsuit medical hud"
 	desc = "A simple medical status indicator for a hardsuit."
@@ -147,11 +147,11 @@
 
 
 // There should only ever be one vision module installed in a suit.
-/obj/item/rig_module/vision/installed()
+/obj/item/rig/module/vision/installed()
 	..()
 	holder.visor = src
 
-/obj/item/rig_module/vision/engage()
+/obj/item/rig/module/vision/engage()
 
 	var/starting_up = !active
 
@@ -174,7 +174,7 @@
 		holder.wearer << "<font color='blue'>Your sensors only have one mode.</font>"
 	return 1
 
-/obj/item/rig_module/vision/New()
+/obj/item/rig/module/vision/New()
 	..()
 
 	if(!vision_modes)

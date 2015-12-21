@@ -205,7 +205,7 @@
 	name = "cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
-	var/amount = MAXCOIL
+	var/amount = 30
 	item_color = COLOR_RED
 	desc = "A coil of power cable."
 	throwforce = 10

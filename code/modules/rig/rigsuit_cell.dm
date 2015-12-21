@@ -1,15 +1,32 @@
-// the power cell
-// charge from 0 to 100%
-// fits in APC to provide backup power
+/obj/item/rig/cell
+	name = "rigsuit power cell"
+	desc = "A rechargable electrochemical power cell."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "cell"
+	item_state = "cell"
+	origin_tech = "powerstorage=1"
+	flags = FPRINT|TABLEPASS
+	force = 5.0
+	throwforce = 5.0
+	throw_speed = 3
+	throw_range = 5
+	w_class = 3.0
+	var/charge = 0	// note %age conveted to actual charge in New
+	var/maxcharge = 12500
+	matter = list("metal" = 700, "glass" = 50)
+	var/rigged = 0		// true if rigged to explode
+	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
+	var/construction_cost = list("metal"=750,"glass"=75)
+	var/construction_time=100
 
-/obj/item/weapon/cell/New()
+/obj/item/rig/cell/New()
 	..()
 	charge = maxcharge
 
 	spawn(5)
 		updateicon()
 
-/obj/item/weapon/cell/proc/updateicon()
+/obj/item/rig/cell/proc/updateicon()
 	overlays.Cut()
 
 	if(charge < 0.01)
@@ -19,14 +36,14 @@
 	else
 		overlays += image('icons/obj/power.dmi', "cell-o1")
 
-/obj/item/weapon/cell/proc/percent()		// return % charge of cell
+/obj/item/rig/cell/proc/percent()		// return % charge of cell
 	return 100.0*charge/maxcharge
 
-/obj/item/weapon/cell/proc/fully_charged()
+/obj/item/rig/cell/proc/fully_charged()
 	return (charge == maxcharge)
 
 // use power from a cell
-/obj/item/weapon/cell/proc/use(var/amount)
+/obj/item/rig/cell/proc/use(var/amount)
 	if(rigged && amount > 0)
 		explode()
 		return 0
@@ -36,7 +53,7 @@
 	return 1
 
 // recharge the cell
-/obj/item/weapon/cell/proc/give(var/amount)
+/obj/item/rig/cell/proc/give(var/amount)
 	if(rigged && amount > 0)
 		explode()
 		return 0
@@ -52,7 +69,7 @@
 	charge += amount_used
 	return amount_used
 
-/obj/item/weapon/cell/examine()
+/obj/item/rig/cell/examine()
 	set src in view(1)
 	if(usr /*&& !usr.stat*/)
 		if(maxcharge <= 2500)
@@ -62,7 +79,7 @@
 	if(crit_fail)
 		usr << "\red This power cell seems to be faulty."
 
-/obj/item/weapon/cell/attack_self(mob/user as mob)
+/obj/item/rig/cell/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -72,7 +89,7 @@
 		SNG.drain("CELL",src,H.wear_suit)
 	return
 
-/obj/item/weapon/cell/attackby(obj/item/W, mob/user)
+/obj/item/rig/cell/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/weapon/reagent_containers/syringe))
 		var/obj/item/weapon/reagent_containers/syringe/S = W
@@ -97,7 +114,7 @@
 
 
 
-/obj/item/weapon/cell/proc/explode()
+/obj/item/rig/cell/proc/explode()
 	var/turf/T = get_turf(src.loc)
 /*
  * 1000-cell	explosion(T, -1, 0, 1, 1)
@@ -126,13 +143,13 @@
 	spawn(1)
 		del(src)
 
-/obj/item/weapon/cell/proc/corrupt()
+/obj/item/rig/cell/proc/corrupt()
 	charge /= 2
 	maxcharge /= 2
 	if (prob(10))
 		rigged = 1 //broken batterys are dangerous
 
-/obj/item/weapon/cell/emp_act(severity)
+/obj/item/rig/cell/emp_act(severity)
 	charge -= 1000 / severity
 	if (charge < 0)
 		charge = 0
@@ -140,7 +157,7 @@
 		reliability -= 10 / severity
 	..()
 
-/obj/item/weapon/cell/ex_act(severity)
+/obj/item/rig/cell/ex_act(severity)
 
 	switch(severity)
 		if(1.0)
@@ -160,11 +177,11 @@
 				corrupt()
 	return
 
-/obj/item/weapon/cell/blob_act()
+/obj/item/rig/cell/blob_act()
 	if(prob(75))
 		explode()
 
-/obj/item/weapon/cell/proc/get_electrocute_damage()
+/obj/item/rig/cell/proc/get_electrocute_damage()
 	switch (charge)
 /*		if (9000 to INFINITY)
 			return min(rand(90,150),rand(90,150))
@@ -192,3 +209,5 @@
 			return min(rand(10,20),rand(10,20))
 		else
 			return 0
+
+

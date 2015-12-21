@@ -1374,6 +1374,7 @@
 #include "code\modules\research\xenoarchaeology\tools\tools_locater.dm"
 #include "code\modules\research\xenoarchaeology\tools\tools_pickaxe.dm"
 #include "code\modules\rig\rig.dm"
+#include "code\modules\rig\rigsuit_cell.dm"
 #include "code\modules\rig\rigsuit_parts.dm"
 #include "code\modules\rig\rigsuit_verbs.dm"
 #include "code\modules\rig\modules\combat.dm"
