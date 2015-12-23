@@ -10,7 +10,6 @@ var/list/same_wires = list()
 var/list/wireColours = list("red", "blue", "green", "black", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink")
 
 /datum/wires
-
 	var/random = 0 // Will the wires be different for every single instance.
 	var/atom/holder = null // The holder
 	var/holder_type = null // The holder type; used to make sure that the holder is the correct type.
@@ -64,9 +63,7 @@ var/list/wireColours = list("red", "blue", "green", "black", "orange", "brown", 
 		src.wires[colour] = index
 		//wires = shuffle(wires)
 
-
 /datum/wires/proc/Interact(var/mob/living/user)
-
 	var/html = null
 	if(holder && CanUse(user))
 		html = GetInteractWindow()

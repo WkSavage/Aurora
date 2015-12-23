@@ -181,6 +181,19 @@ RCD
 		return 0
 	return user:cell:charge >= (amount * 30)
 
+/obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
+	var/cost = amount*30
+	if(istype(loc,/obj/item/rig_module))
+		var/obj/item/rig_module/module = loc
+		if(module.holder && module.holder.cell)
+			if(module.holder.cell.charge >= cost)
+				module.holder.cell.use(cost)
+				return 1
+	return 0
+
+/obj/item/weapon/rcd/mounted/attackby()
+	return
+
 /obj/item/weapon/rcd/borg/New()
 	..()
 	desc = "A device used to rapidly build walls/floor."
