@@ -1,4 +1,3 @@
-// Interface for humans.
 /obj/item/weapon/rig/verb/hardsuit_interface()
 
 	set name = "Open Hardsuit Interface"
@@ -141,6 +140,9 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(malfunction_check(usr))
+		return
+
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
@@ -163,10 +165,14 @@
 
 /*
 /obj/item/weapon/rig/verb/alter_voice()
+
 	set name = "Configure Voice Synthesiser"
 	set desc = "Toggles or configures your voice synthesizer."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"
@@ -189,6 +195,9 @@
 	set desc = "Selects a module as your primary system."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
@@ -222,6 +231,9 @@
 	set desc = "Toggle a system module."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
@@ -257,6 +269,9 @@
 	set desc = "Engages a system module."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"

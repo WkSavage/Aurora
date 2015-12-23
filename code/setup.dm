@@ -63,6 +63,8 @@
 #define ARMOR_MIN_COLD_PROTECTION_TEMPERATURE 160	//For armor
 #define ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For armor
 #define AIRTIGHT 4	    // functions with internals
+#define STOPPRESSUREDAMAGE     0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
+
 
 #define GLOVES_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For some gloves (black and)
 #define GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For some gloves
