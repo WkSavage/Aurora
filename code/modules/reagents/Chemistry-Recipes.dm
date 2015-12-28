@@ -1069,40 +1069,45 @@ datum
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-				var/blocked = list(/mob/living/simple_animal/hostile,
-					/mob/living/simple_animal/hostile/pirate,
-					/mob/living/simple_animal/hostile/pirate/ranged,
-					/mob/living/simple_animal/hostile/russian,
-					/mob/living/simple_animal/hostile/russian/ranged,
-					/mob/living/simple_animal/hostile/syndicate,
-					/mob/living/simple_animal/hostile/syndicate/melee,
-					/mob/living/simple_animal/hostile/syndicate/melee/space,
-					/mob/living/simple_animal/hostile/syndicate/ranged,
-					/mob/living/simple_animal/hostile/syndicate/ranged/space,
-					/mob/living/simple_animal/hostile/alien/queen/large,
-					/mob/living/simple_animal/hostile/faithless,
-					/mob/living/simple_animal/hostile/panther,
-					/mob/living/simple_animal/hostile/snake,
-					/mob/living/simple_animal/hostile/retaliate,
-					/mob/living/simple_animal/hostile/retaliate/clown
-					)//exclusion list for things you don't want the reaction to create.
-				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
+				var/highchance = list(/obj/item/stack/sheet/glass,
+				/obj/item/stack/sheet/rglass,/obj/item/stack/sheet/glass/plasmarglass,
+				/obj/item/stack/sheet/mineral/sandstone,/obj/item/stack/sheet/plasteel,
+				/obj/item/stack/sheet/mineral/plastic, /obj/item/stack/sheet/mineral/silver,
+				/obj/item/stack/sheet/mineral/iron, /obj/item/stack/sheet/metal)
+				var/lowchance = list(/obj/item/stack/sheet/mineral/diamond, /obj/item/stack/sheet/mineral/uranium,
+				/obj/item/stack/sheet/mineral/plasma, /obj/item/stack/sheet/mineral/gold,
+				/obj/item/stack/sheet/mineral/clown, /obj/item/stack/sheet/mineral/enruranium,
+				/obj/item/stack/sheet/mineral/adamantine, /obj/item/stack/sheet/mineral/mythril,
+				/obj/item/stack/sheet/mineral/platinum)
+				var/honkchance = list(/obj/item/stack/sheet/mineral/clown, /obj/item/weapon/card/data/clown)
 
 				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 
-				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-					if(M:eyecheck() <= 0)
-						flick("e_flash", M.flash)
-				for(var/i = 1, i <= 5, i++)
-					var/chosen = pick(critters)
-					var/mob/living/simple_animal/hostile/C = new chosen
-					C.faction = "slimesummon"
-					C.loc = get_turf(holder.my_atom)
-					if(prob(50))
-						for(var/j = 1, j <= rand(1, 3), j++)
-							step(C, pick(NORTH,SOUTH,EAST,WEST))
-//				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-//					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
+				for(var/i = 1, i <= 4 + rand(1,2), i++)
+					if(prob(99))
+						var/chosenhigh = pick(highchance)
+						var/obj/B = new chosenhigh
+						if(B)
+							B.loc = get_turf(holder.my_atom)
+							for(var/j = 1, j <= rand(1, 3), j++)
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
+					if(prob(20))
+						var/chosenlow = pick(lowchance)
+						var/obj/B = new chosenlow
+						if(B)
+							B.loc = get_turf(holder.my_atom)
+							for(var/j = 1, j <= 2, j++)
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
+					if(prob(5))
+						var/pickhonk = pick(honkchance)
+						var/obj/B = new pickhonk
+						if(B)
+							B.loc = get_turf(holder.my_atom)
+							if(prob(50))
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
+					else
+						for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+							O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
 
 /*		slimecatalyst
 			name = "slime catalyst"
