@@ -39,7 +39,7 @@
 /obj/item/weapon/crossbow
 
 	name = "powered crossbow"
-	desc = "A 2557AD twist on an old classic. Pick up that can."
+	desc = "A 2550AD twist on an old classic. Pick up that can."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"

@@ -61,3 +61,4 @@
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/datum/effect/effect/system/spark_spread/spark_system
+	var/mob/living/creator
