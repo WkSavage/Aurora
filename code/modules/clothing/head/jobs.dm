@@ -59,11 +59,30 @@
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "beret_badge"
 	flags = FPRINT | TABLEPASS
+
 /obj/item/clothing/head/beret/eng
 	name = "engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
 	icon_state = "e_beret_badge"
 	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/head/helmet/warden
+	name = "warden's hat"
+	desc = "It's a special helmet issued to the Warden of a securiy force. Protects the head from impacts."
+	icon_state = "policehelm"
+	flags_inv = 0
+
+/obj/item/clothing/head/helmet/warden/commissar
+	name = "commissar's cap"
+	desc = "A security commissar's cap."
+	icon_state = "commissarcap"
+	flags_inv = 0
+
+/obj/item/clothing/head/helmet/secfcap
+	name = "officer's cap"
+	desc = "A security officer's cap."
+	icon_state = "officercap"
+	flags_inv = 0
 
 //Medical
 /obj/item/clothing/head/surgery

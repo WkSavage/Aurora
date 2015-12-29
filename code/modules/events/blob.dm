@@ -1,5 +1,5 @@
 /datum/event/blob
-	announceWhen	= 12
+	announceWhen	= 3
 	endWhen			= 120
 
 	var/obj/effect/blob/core/Blob

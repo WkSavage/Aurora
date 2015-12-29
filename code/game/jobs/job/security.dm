@@ -12,8 +12,8 @@
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_detective)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
-			            access_forensics, access_morgue, access_maint_tunnels, access_all_personal_lockers,
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_medical,
+			            access_forensics, access_morgue, access_maint_tunnels, access_all_personal_lockers, access_medical,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_detective)
 	minimal_player_age = 10
 

@@ -7,7 +7,7 @@
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
 	item_color = "yellow" //Determines used sprites: hardhat[on]_[color] and hardhat[on]_[color]2 (lying down sprite)
-	armor = list(melee = 30, bullet = 5, laser = 20,energy = 10, bomb = 20, bio = 10, rad = 20)
+	armor = list(melee = 25, bullet = 5, laser = 15, energy = 15, bomb = 10, bio = 10, rad = 10)
 	flags_inv = 0
 	icon_action_button = "action_hardhat"
 	siemens_coefficient = 0.9

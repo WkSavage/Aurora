@@ -26,6 +26,16 @@
 	feedback_add_details("admin_verb","PLS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
+/client/proc/ban_hammer()
+	set category = "Fun"
+	set name = "BanHammer"
+
+	message_admins("[key_name_admin(usr)] has declared Ban Time!", 1)
+	for(var/mob/M in player_list)
+		if(M.client.prefs.toggles & SOUND_MIDI)
+			M << 'sound/music/banhammer.ogg'
+
+
 /*
 /client/proc/cuban_pete()
 	set category = "Fun"
