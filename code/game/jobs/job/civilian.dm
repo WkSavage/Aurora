@@ -329,7 +329,7 @@
 		return 1
 
 
-
+/*
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
@@ -369,3 +369,4 @@
 		affected.implants += L
 		L.part = affected
 		return 1
+*/

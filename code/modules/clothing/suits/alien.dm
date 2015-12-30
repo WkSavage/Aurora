@@ -14,6 +14,15 @@
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
 
+/obj/item/clothing/suit/unathi/cloak
+	name = "old cloak"
+	desc = "Some head-wrapping that doubles as a cape.. Looks like it used to be a flag or something."
+	icon = 'icons/unsortedicons.dmi'
+	icon_state = "Kayodecloak"
+	item_state = "Kayodecloak"
+	body_parts_covered = HEAD
+
+
 //Taj clothing.
 
 /obj/item/clothing/suit/tajaran/furs

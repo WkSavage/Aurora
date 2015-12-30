@@ -593,3 +593,9 @@ proc/populate_gear_list()
 	display_name = "cigar case"
 	path = /obj/item/weapon/storage/fancy/cigars
 	cost = 3
+
+/datum/gear/kaydoecloak
+	display_name = "old cloak"
+	path = /obj/item/clothing/suit/unathi/cloak
+	cost = 1
+	whitelisted = "Unathi"

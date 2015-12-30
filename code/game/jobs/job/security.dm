@@ -9,10 +9,10 @@
 	selection_color = "#ffdddd"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
-	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
+	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_warden,
 			            access_forensics, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_detective)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_medical,
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_medical, access_warden,
 			            access_forensics, access_morgue, access_maint_tunnels, access_all_personal_lockers, access_medical,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_detective)
 	minimal_player_age = 10
@@ -62,8 +62,8 @@
 	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
-	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_external_airlocks)
+	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_external_airlocks, access_warden)
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_external_airlocks, access_warden)
 	minimal_player_age = 10
 
 	equip(var/mob/living/carbon/human/H)
