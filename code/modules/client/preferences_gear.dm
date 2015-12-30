@@ -596,6 +596,6 @@ proc/populate_gear_list()
 
 /datum/gear/kaydoecloak
 	display_name = "old cloak"
-	path = /obj/item/clothing/suit/unathi/cloak
+	path = /obj/item/clothing/head/cloak
 	cost = 1
 	whitelisted = "Unathi"

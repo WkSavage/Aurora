@@ -55,6 +55,13 @@
 	icon_state = "hasturhood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 
+/obj/item/clothing/head/cloak
+	name = "old cloak"
+	desc = "Some head-wrapping that doubles as a cape.. Looks like it used to be a flag or something."
+	icon = 'icons/unsortedicons.dmi'
+	icon_state = "Kayodecloak"
+	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
+
 /obj/item/clothing/head/nursehat
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
