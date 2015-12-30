@@ -59,7 +59,6 @@
 		return 1	//Available in 0 days = available right now = player is old enough to play.
 	return 0
 
-
 /datum/job/proc/available_in_days(client/C)
 	if(!C)
 		return 0
@@ -75,3 +74,6 @@
 /datum/job/proc/fetch_age_restriction()
 	if (config.age_restrictions[lowertext(title)])
 		minimal_player_age = config.age_restrictions[lowertext(title)]
+
+/datum/job/proc/is_position_available()
+	return (current_positions < total_positions) || (total_positions == -1)
