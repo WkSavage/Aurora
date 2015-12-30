@@ -13,16 +13,16 @@
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
-	desc = "An armored vest that protects against some damage."
+	desc = "An armored vest that protects against physical damage."
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 15, laser = 20, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
-	desc = "An armored vest that protects against some damage. This one has NanoTrasen corporate badge."
+	desc = "An armored vest that protects against physical damage. This one has NanoTrasen corporate badge."
 	icon_state = "armorsec"
 	item_state = "armor"
 
@@ -31,18 +31,21 @@
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
 	item_state = "armor"
+	armor = list(melee = 60, bullet = 20, laser = 20, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/warden/jacket
 	name = "Warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "formal_warden"
 	item_state = "formal_warden"
+	armor = list(melee = 60, bullet = 20, laser = 20, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/warden/commissar
 	name = "Commissar's jacket"
 	desc = "An tasteful dark blue jacket with silver and white highlights. Has hard-plate inserts for armor."
 	icon_state = "commissar_warden"
 	item_state = "commissar_warden"
+	armor = list(melee = 60, bullet = 20, laser = 20, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/riot
 	name = "Riot Suit"
@@ -51,7 +54,7 @@
 	item_state = "swat_suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	slowdown = 1
-	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
 
@@ -85,7 +88,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/clothing/tie/holobadge,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen,/obj/item/device/flashlight)
 	slowdown = 1
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 0, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 50, energy = 25, bomb = 50, bio = 0, rad = 0)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -109,7 +112,7 @@
 	blood_overlay_type = "armor"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 15, laser = 40, energy = 25, bomb = 25, bio = 0, rad = 0)
 
 
 //Reactive armor
@@ -149,13 +152,11 @@
 	src.item_state = "reactiveoff"
 	..()
 
-
 //All of the armor below is mostly unused
-
 
 /obj/item/clothing/suit/armor/centcomm
 	name = "Cent. Com. armor"
-	desc = "A suit that protects against some damage."
+	desc = "A fancy suit with the NT Command logo imprinted on it. You can see the advance armor plating attached."
 	icon_state = "centcom"
 	item_state = "centcom"
 	w_class = 4//bulky item
@@ -165,6 +166,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
+	armor = list(melee = 70, bullet = 55, laser = 55, energy = 45, bomb = 50, bio = 20, rad = 20)
 
 /obj/item/clothing/suit/armor/heavy
 	name = "heavy armor"
@@ -177,6 +179,7 @@
 	slowdown = 3
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 0
+	armor = list(melee = 60, bullet = 30, laser = 40, energy = 20, bomb = 20, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/tdome
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -188,6 +191,7 @@
 	icon_state = "tdred"
 	item_state = "tdred"
 	siemens_coefficient = 1
+	armor = list(melee = 85, bullet = 10, laser = 55, energy = 15, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/tdome/green
 	name = "Thunderdome suit (green)"
@@ -195,6 +199,7 @@
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 	siemens_coefficient = 1
+	armor = list(melee = 85, bullet = 10, laser = 55, energy = 15, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/tactical
 	name = "tactical armor"
@@ -275,3 +280,13 @@
 	blood_overlay_type = "armor"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	armor = list(melee = 65, bullet = 25, laser = 65, energy = 25, bomb = 35, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/armor/deathsquad
+	name = "Tactical Plated Armored Suit"
+	desc = "A platecarrier worns by the commanders of NanoTrasen's Emergency Response Teams."
+	icon_state = "hazard_rig_sealed"
+	item_state = "hazard_rig_sealed"
+	blood_overlay_type = "armor"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	armor = list(melee = 100, bullet = 75, laser = 75, energy = 75, bomb = 50, bio = 25, rad = 25)
+
