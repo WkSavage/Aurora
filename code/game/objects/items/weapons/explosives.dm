@@ -53,7 +53,7 @@
 				message_admins("C4 Explosion: Last touched by: [src.fingerprintslast][last_touch_info]([user.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 				message_mods("C4 Explosion: Last touched by: [src.fingerprintslast][last_touch_info]([user.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 
-				explosion(location, -1, -1, 2, 3)
+				explosion(location, 1, 1, 3, 5)
 				if (istype(target, /turf/simulated/wall)) target:dismantle_wall(1)
 				else target.ex_act(1)
 				if (isobj(target))
