@@ -228,3 +228,9 @@ var/list/beam_master = list()
 		var/mob/living/silicon/robot/M = target
 		M.adjust_fire_stacks(1)
 		M.IgniteMob()
+
+/obj/item/projectile/beam/violet/drone
+	name = "drone laser"
+	icon_state = "laserviolet"
+	damage = 10
+	eyeblur = 1

@@ -34,7 +34,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	break_stuff_probability = 2
+	break_stuff_probability = 3
 
 	faction = "carp"
 
@@ -67,9 +67,9 @@
 	icon_living = "critter"
 	icon_dead = "critter_dead"
 	attackv = "swoops"
-	
+
 // Holographic carp for the holodeck
-	
+
 /mob/living/simple_animal/hostile/carp/hologram
 	name = "space carp"
 	desc = "A solid light image of a ferocious, fang-bearing creature resembling a fish. It flickers inconsistently but appears to be able to affect solid matter."
@@ -79,15 +79,15 @@
 	icon_gib = "carp_gib"
 	meat_type = null
 	var/datum/effect/effect/system/spark_spread/spark_system // for when they die
-	
-	
+
+
 /mob/living/simple_animal/hostile/carp/hologram/New(loc)
 	. = ..(loc)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
-	
-	
+
+
 /mob/living/simple_animal/hostile/carp/hologram/death()
 	src.spark_system.start() // sparks for holograms! Hurray!
 	stat = DEAD
@@ -95,7 +95,7 @@
 	. = ..()
 	src.visible_message("[src] sparks and then flickers out of existence.")
 	del(src)
-	
-	
+
+
 /mob/living/simple_animal/hostile/carp/hologram/gib()
 	return death()

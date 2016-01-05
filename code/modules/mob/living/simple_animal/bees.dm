@@ -1,6 +1,7 @@
 
 /mob/living/simple_animal/bee
 	name = "bees"
+	desc = "BEES!"
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "bees1"
 	icon_dead = "bees1"
@@ -11,8 +12,14 @@
 	var/turf/target_turf
 	var/mob/target_mob
 	var/obj/machinery/apiary/parent
+	attacktext = "stings"
+	response_help  = "shoos"
+	response_disarm = "swats away"
+	response_harm   = "squashes"
 	pass_flags = PASSTABLE
 	turns_per_move = 6
+	maxHealth = 10
+	health = 10
 	var/obj/machinery/portable_atmospherics/hydroponics/my_hydrotray
 
 /mob/living/simple_animal/bee/New(loc, var/obj/machinery/apiary/new_parent)
@@ -90,6 +97,7 @@
 			if(istype(check_effect))
 				if(check_effect.type == this_type)
 					calming = 1
+					feral --
 					break
 
 		if(calming)
@@ -176,3 +184,73 @@
 	/*icon_state = "[strength]"
 	if(strength > 5)
 		icon_state = "unknown"*/
+
+/mob/living/simple_animal/bee/domesticatedbees
+	name = "Domesticated Space Bees"
+	icon = 'icons/obj/apiary_bees_etc.dmi'
+	icon_state = "bees1"
+	icon_dead = "bees1"
+	strength = 1
+	feral = 0
+	mut = 0
+	toxic = 0
+	attacktext = "stings"
+	response_help  = "shoos"
+	response_disarm = "swats away"
+	response_harm   = "squashes"
+	pass_flags = PASSTABLE
+	turns_per_move = 6
+
+/mob/living/simple_animal/bee/angrybees
+	name = "Angry Space Bees"
+	icon = 'icons/obj/apiary_bees_etc.dmi'
+	icon_state = "bees1"
+	icon_dead = "bees1"
+	strength = 5
+	feral = 25
+	mut = 0
+	toxic = 1
+	attacktext = "stings"
+	response_help  = "shoos"
+	response_disarm = "swats away"
+	response_harm   = "squashes"
+	pass_flags = PASSTABLE
+	turns_per_move = 6
+
+	min_oxy = 0
+	max_oxy = 0
+	min_tox = 0
+	max_tox = 0
+	min_co2 = 0
+	max_co2 = 0
+	min_n2 = 0
+	max_n2 = 0
+	minbodytemp = 0
+
+/mob/living/simple_animal/bee/adminsbees
+	name = "Magic Space Bees"
+	desc = "I think you fucked up"
+	icon = 'icons/obj/apiary_bees_etc.dmi'
+	icon_state = "bees1"
+	icon_dead = "bees1"
+	strength = 100
+	feral = 100
+	mut = 100
+	toxic = 1
+	attacktext = "stings"
+	response_help  = "shoos"
+	response_disarm = "swats away"
+	response_harm   = "squashes"
+	pass_flags = PASSTABLE
+	turns_per_move = 6
+
+	min_oxy = 0
+	max_oxy = 0
+	min_tox = 0
+	max_tox = 0
+	min_co2 = 0
+	max_co2 = 0
+	min_n2 = 0
+	max_n2 = 0
+	minbodytemp = 0
+

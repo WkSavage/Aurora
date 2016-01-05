@@ -12,13 +12,13 @@
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
-	speed = 4
+	speed = 6
 	maxHealth = 45
 	health = 45
 
-	harm_intent_damage = 8
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	harm_intent_damage = 4
+	melee_damage_lower = 3.5
+	melee_damage_upper = 5
 	attacktext = "bites"
 	attack_sound = 'sound/weapons/bite.ogg'
 
@@ -33,7 +33,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-//	break_stuff_probability = 2
+	break_stuff_probability = 1
 
 	faction = "scarybat"
 	var/mob/living/owner

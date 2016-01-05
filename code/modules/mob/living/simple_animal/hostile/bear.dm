@@ -146,27 +146,27 @@
 		M.attack_animal(src)
 		return M
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/mob/living/simple_animal/hostile/bear/hudson
+	name = "Hudson the cockblock bear"
+	desc = "He sees you when you jack off, he knows when your elope, he knows when you fuck your mate so dont fuck for fucking sake. HEY!"
+	icon_state = "bear"
+	icon_living = "bear"
+	icon_dead = "bear_dead"
+	icon_gib = "bear_gib"
+	speak = list("RAWR!","Rawr!","GRR!","Growl!")
+	speak_emote = list("growls", "roars")
+	emote_hear = list("rawrs","grumbles","grawls")
+	emote_see = list("stares into your soul", "looks deep behind your eyes")
+	speak_chance = 1
+	speed = 2
+	turns_per_move = 7
+	see_in_dark = 10
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
+	response_help  = "pets the"
+	response_disarm = "gently pushes aside the"
+	response_harm   = "pokes the"
+	stop_automated_movement_when_pulled = 0
+	maxHealth = 69
+	health = 69
+	melee_damage_lower = 30
+	melee_damage_upper = 30

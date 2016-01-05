@@ -427,7 +427,7 @@ See code\modules\mob\new_player\preferences_setup.dm for where it's used.
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	warning_low_pressure = 50
+	warning_low_pressure = 10
 	hazard_low_pressure = 0
 
 	cold_level_1 = 80
@@ -468,7 +468,7 @@ See code\modules\mob\new_player\preferences_setup.dm for where it's used.
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	rarity_value = 10
 
-	warning_low_pressure = 50
+	warning_low_pressure = 0
 	hazard_low_pressure = 0
 
 	cold_level_1 = 80

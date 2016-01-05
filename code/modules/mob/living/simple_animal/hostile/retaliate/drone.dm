@@ -19,8 +19,8 @@
 	stop_automated_movement_when_pulled = 0
 	health = 300
 	maxHealth = 300
-	speed = 8
-	projectiletype = /obj/item/projectile/beam/drone
+	speed = 10
+	projectiletype = /obj/item/projectile/beam/violet/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail
@@ -52,7 +52,7 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/New()
 	..()
 	if(prob(5))
-		projectiletype = /obj/item/projectile/beam/pulse/drone
+		projectiletype = /obj/item/projectile/beam/violet/drone
 		projectilesound = 'sound/weapons/pulse2.ogg'
 	ion_trail = new
 	ion_trail.set_up(src)
@@ -273,8 +273,3 @@
 
 	..()
 
-/obj/item/projectile/beam/drone
-	damage = 15
-
-/obj/item/projectile/beam/pulse/drone
-	damage = 10
