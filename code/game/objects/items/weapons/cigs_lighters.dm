@@ -3,16 +3,15 @@
 /*
 CONTAINS:
 MATCHES
-SMOKING PIPES
 CHEAP LIGHTERS
 ZIPPO
-
 CIGARETTE PACKETS ARE IN FANCY.DM
 */
 
 ///////////
 //MATCHES//
 ///////////
+
 /obj/item/weapon/match
 	name = "match"
 	desc = "A simple match stick, used for lighting fine smokables."
@@ -50,99 +49,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A match. This one has seen better days."
 	processing_objects.Remove(src)
 
-/////////////////
-//SMOKING PIPES//
-/////////////////
-/obj/item/clothing/mask/cigarette/pipe
-	name = "smoking pipe"
-	desc = "A pipe, for smoking. Probably made of meershaum or something."
-	icon_state = "pipeoff"
-	item_state = "pipeoff"
-	icon_on = "pipeon"  //Note - these are in masks.dmi
-	icon_off = "pipeoff"
-	smoketime = 100
-	can_hurt_mob = 0
-
-/obj/item/clothing/mask/cigarette/pipe/light(var/flavor_text = "[usr] lights the [name].")
-	if(!src.lit)
-		src.lit = 1
-		damtype = "fire"
-		icon_state = icon_on
-		item_state = icon_on
-		var/turf/T = get_turf(src)
-		T.visible_message(flavor_text)
-		processing_objects.Add(src)
-
-/obj/item/clothing/mask/cigarette/pipe/process()
-	var/turf/location = get_turf(src)
-	smoketime--
-	if(smoketime < 1)
-		new /obj/effect/decal/cleanable/ash(location)
-		if(ismob(loc))
-			var/mob/living/M = loc
-			M << "<span class='notice'>Your [name] goes out, and you empty the ash.</span>"
-			lit = 0
-			icon_state = icon_off
-			item_state = icon_off
-			M.update_inv_wear_mask(0)
-		processing_objects.Remove(src)
-		return
-	if(location)
-		location.hotspot_expose(700, 5)
-	return
-
-/obj/item/clothing/mask/cigarette/pipe/attack_self(mob/user as mob) //Refills the pipe. Can be changed to an attackby later, if loose tobacco is added to vendors or something.
-	if(lit == 1)
-		user.visible_message("<span class='notice'>[user] puts out [src].</span>")
-		lit = 0
-		icon_state = icon_off
-		item_state = icon_off
-		processing_objects.Remove(src)
-		return
-	if(smoketime <= 0)
-		user << "<span class='notice'>You refill the pipe with tobacco.</span>"
-		smoketime = initial(smoketime)
-	return
-
-/obj/item/clothing/mask/cigarette/pipe/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(WT.isOn())//
-			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
-
-	else if(istype(W, /obj/item/weapon/lighter/zippo))
-		var/obj/item/weapon/lighter/zippo/Z = W
-		if(Z.lit)
-			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
-
-	else if(istype(W, /obj/item/weapon/lighter))
-		var/obj/item/weapon/lighter/L = W
-		if(L.lit)
-			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
-
-	else if(istype(W, /obj/item/weapon/match))
-		var/obj/item/weapon/match/M = W
-		if(M.lit)
-			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
-
-	else if(istype(W, /obj/item/device/assembly/igniter))
-		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
-
-/obj/item/clothing/mask/cigarette/pipe/cobpipe
-	name = "corn cob pipe"
-	desc = "A nicotine delivery system popularized by folksy backwoodsmen, kept popular in the modern age and beyond by space hipsters."
-	icon_state = "cobpipeoff"
-	item_state = "cobpipeoff"
-	icon_on = "cobpipeon"  //Note - these are in masks.dmi
-	icon_off = "cobpipeoff"
-	smoketime = 400
-	can_hurt_mob = 0
-
-
-
 /////////
 //ZIPPO//
 /////////
+
 /obj/item/weapon/lighter
 	name = "cheap lighter"
 	desc = "A cheap-as-free lighter."

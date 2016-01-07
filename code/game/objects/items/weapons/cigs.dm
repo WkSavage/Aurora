@@ -209,13 +209,28 @@
 			reagents.remove_any(REAGENTS_METABOLISM)
 	return
 
-
 /obj/item/clothing/mask/cigarette/attack_self(mob/user as mob)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] calmly drops and treads on the lit [src], putting it out instantly.</span>")
 		die()
 	return ..()
 
+/obj/item/clothing/mask/cigarette/afterattack(var/obj/item/weapon/reagent_containers/glass/G, var/obj/item/clothing/mask/cigarette/C, mob/user as mob, proximity)
+	..()
+	if(!proximity)
+		return
+	if(lit == 1)
+		return
+	if(!lit)
+		if(istype(G))
+			var/transfered = G.reagents.trans_to(src)
+			if(transfered)
+				user << "<span class='notice'>You dip \the [src] into \the [G].</span>"
+		else
+			if(!G.reagents.total_volume)
+				user << "<span class='notice'>[G] is empty.</span>"
+			else
+				user << "<span class='notice'>[src] is full.</span>"
 
 /obj/item/clothing/mask/cigarette/proc/die()
 	var/turf/T = get_turf(src)
@@ -229,9 +244,52 @@
 	processing_objects.Remove(src)
 	del(src)
 
-////////////
-// CIGARS //
-////////////
+// Hand Rolled Fine Smokeables
+
+/obj/item/clothing/mask/cigarette/joint
+	name = "joint"
+	desc = "A roll of ambrosium vulgaris wrapped in a thin paper. Dude."
+	icon_state = "spliffoff"
+	icon_on = "spliffon"
+	icon_off = "spliffoff"
+	type_butt = /obj/item/weapon/cigbutt/roach
+	throw_speed = 0.5
+	item_state = "spliffoff"
+	smoketime = 180
+	chem_volume = 50
+
+/obj/item/clothing/mask/cigarette/joint/New()
+	..()
+	var/list/jointnames = list("joint","doobie","spliff","blunt")
+	name = pick(jointnames)
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+/obj/item/clothing/mask/cigarette/joint/deus
+	desc = "A roll of ambrosium deus wrapped in a thin paper. Dude."
+
+/obj/item/weapon/cigbutt/roach
+	name = "roach"
+	desc = "A manky old roach."
+	icon_state = "roach"
+
+/obj/item/weapon/cigbutt/roach/New()
+	..()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+/obj/item/clothing/mask/cigarette/handroll
+	name = "hand-rolled cigarette"
+	desc = "A roll of tobacco and nicotine, freshly rolled by hand."
+	icon_state = "hr_cigoff"
+	item_state = "hr_cigoff"
+	icon_on = "hr_cigon"  //Note - these are in masks.dmi not in cigarette.dmi
+	icon_off = "hr_cigoff"
+	type_butt = /obj/item/weapon/cigbutt
+	chem_volume = 50
+
+// Fancy Premium Fine Smokeables
+
 /obj/item/clothing/mask/cigarette/cigar
 	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
@@ -242,7 +300,7 @@
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
-	chem_volume = 20
+	chem_volume = 60
 	can_hurt_mob = 1
 
 /obj/item/clothing/mask/cigarette/cigar/cohiba
@@ -260,7 +318,6 @@
 	icon_on = "cigar2on"
 	icon_off = "cigar2off"
 	smoketime = 7200
-	chem_volume = 30
 	can_hurt_mob = 1
 
 /obj/item/weapon/cigbutt
@@ -281,7 +338,6 @@
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
-
 
 /obj/item/clothing/mask/cigarette/cigar/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/weldingtool))
@@ -311,3 +367,92 @@
 
 	else if(istype(W, /obj/item/device/assembly/igniter))
 		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+//Fine Smokeable Pipes
+
+/obj/item/clothing/mask/cigarette/pipe
+	name = "smoking pipe"
+	desc = "A pipe, for smoking. Probably made of meershaum or something."
+	icon_state = "pipeoff"
+	item_state = "pipeoff"
+	icon_on = "pipeon"  //Note - these are in masks.dmi
+	icon_off = "pipeoff"
+	smoketime = 100
+	can_hurt_mob = 0
+
+/obj/item/clothing/mask/cigarette/pipe/light(var/flavor_text = "[usr] lights the [name].")
+	if(!src.lit)
+		src.lit = 1
+		damtype = "fire"
+		icon_state = icon_on
+		item_state = icon_on
+		var/turf/T = get_turf(src)
+		T.visible_message(flavor_text)
+		processing_objects.Add(src)
+
+/obj/item/clothing/mask/cigarette/pipe/process()
+	var/turf/location = get_turf(src)
+	smoketime--
+	if(smoketime < 1)
+		new /obj/effect/decal/cleanable/ash(location)
+		if(ismob(loc))
+			var/mob/living/M = loc
+			M << "<span class='notice'>Your [name] goes out, and you empty the ash.</span>"
+			lit = 0
+			icon_state = icon_off
+			item_state = icon_off
+			M.update_inv_wear_mask(0)
+		processing_objects.Remove(src)
+		return
+	if(location)
+		location.hotspot_expose(700, 5)
+	return
+
+/obj/item/clothing/mask/cigarette/pipe/attack_self(mob/user as mob) //Refills the pipe. Can be changed to an attackby later, if loose tobacco is added to vendors or something.
+	if(lit == 1)
+		user.visible_message("<span class='notice'>[user] puts out [src].</span>")
+		lit = 0
+		icon_state = icon_off
+		item_state = icon_off
+		processing_objects.Remove(src)
+		return
+	if(smoketime <= 0)
+		user << "<span class='notice'>You refill the pipe with tobacco.</span>"
+		smoketime = initial(smoketime)
+	return
+
+/obj/item/clothing/mask/cigarette/pipe/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())//
+			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter/zippo))
+		var/obj/item/weapon/lighter/zippo/Z = W
+		if(Z.lit)
+			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter))
+		var/obj/item/weapon/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/match))
+		var/obj/item/weapon/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+/obj/item/clothing/mask/cigarette/pipe/cobpipe
+	name = "corn cob pipe"
+	desc = "A nicotine delivery system popularized by folksy backwoodsmen, kept popular in the modern age and beyond by space hipsters."
+	icon_state = "cobpipeoff"
+	item_state = "cobpipeoff"
+	icon_on = "cobpipeon"  //Note - these are in masks.dmi
+	icon_off = "cobpipeoff"
+	smoketime = 400
+	can_hurt_mob = 0
+
+
