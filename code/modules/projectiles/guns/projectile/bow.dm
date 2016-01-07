@@ -6,10 +6,9 @@
 	icon_state = "bolt"
 	item_state = "bolt"
 	flags =  FPRINT | TABLEPASS
-	throwforce = 8
+	throwforce = 6
 	w_class = 3.0
 	sharp = 1
-	edge = 0
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
@@ -51,7 +50,7 @@
 
 	var/tension = 0                       // Current draw on the bow.
 	var/max_tension = 5                   // Highest possible tension.
-	var/release_speed = 5                 // Speed per unit of tension.
+	var/release_speed = 3                 // Speed per unit of tension.
 	var/mob/living/current_user = null    // Used to see if the person drawing the bow started drawing it.
 	var/obj/item/weapon/arrow = null      // Nocked arrow.
 	var/obj/item/weapon/cell/cell = null  // Used for firing special projectiles like rods.
@@ -90,7 +89,7 @@
 			if(arrow)
 				if(istype(arrow,/obj/item/weapon/arrow/rod) && arrow.throwforce < 15 && cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
-					arrow.throwforce = 15
+					arrow.throwforce = 10
 					arrow.icon_state = "metal-rod-superheated"
 					cell.use(500)
 		else

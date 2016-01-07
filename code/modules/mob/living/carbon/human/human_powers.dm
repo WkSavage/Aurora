@@ -122,6 +122,57 @@
 	G.icon_state = "grabbed1"
 	G.synch()
 
+/mob/living/carbon/human/proc/leapweak()
+	set category = "Abilities"
+	set name = "Leap"
+	set desc = "Attempt to leap at a target."
+
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(6,src))
+		if(!istype(M,/mob/living/silicon))
+			choices += M
+	choices -= src
+
+	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
+
+	if(!T || !src || src.stat) return
+
+	if(get_dist(get_turf(T), get_turf(src)) > 6) return
+
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	last_special = world.time + 75
+	status_flags |= LEAPING
+
+	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
+	src.throw_at(get_step(get_turf(T),get_turf(src)), 5, 1, src)
+	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
+
+	sleep(5)
+
+	if(status_flags & LEAPING) status_flags &= ~LEAPING
+
+	if(!src.Adjacent(T))
+		src << "\red You miss!"
+		return
+
+	T.Weaken(5)
+	src.Weaken(5)
+
+	src.visible_message("<span class='warning'><b>\The [src]</b> knocks [T] over!</span>") //for debug
+
 /mob/living/carbon/human/proc/gut()
 	set category = "Abilities"
 	set name = "Gut"

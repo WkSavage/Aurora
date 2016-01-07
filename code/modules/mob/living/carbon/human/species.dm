@@ -427,7 +427,7 @@ See code\modules\mob\new_player\preferences_setup.dm for where it's used.
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	warning_low_pressure = 10
+	warning_low_pressure = 0
 	hazard_low_pressure = 0
 
 	cold_level_1 = 80
@@ -500,6 +500,53 @@ See code\modules\mob\new_player\preferences_setup.dm for where it's used.
 		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/commune
+		)
+
+/datum/species/voxpariah
+	name = "Vox Pariah"
+	name_plural = "Vox Pariah"
+	icobase = 'icons/mob/human_races/r_vox.dmi'
+	deform = 'icons/mob/human_races/r_def_vox.dmi'
+	default_language = "Vox-pidgin"
+	language = "Ceti Basic"
+	unarmed_type = /datum/unarmed_attack/claws/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	rarity_value = 2
+	slowdown = 2
+
+	speech_sounds = list('sound/voice/shriek1.ogg')
+	speech_chance = 50
+
+	warning_low_pressure = 65
+	hazard_low_pressure = 35
+
+	cold_level_1 = 80
+	cold_level_2 = 60
+	cold_level_3 = 40
+
+	eyes = "vox_eyes_s"
+
+	breath_type = "nitrogen"
+	poison_type = "oxygen"
+
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+
+	reagent_tag = IS_VOX
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/leapweak
+		)
+
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"lungs" =    /datum/organ/internal/lungs,
+		"liver" =    /datum/organ/internal/liver,
+		"kidneys" =  /datum/organ/internal/kidney,
+		"brain" =    /datum/organ/internal/brain,
+		"eyes" =     /datum/organ/internal/eyes
 		)
 
 /datum/species/diona
