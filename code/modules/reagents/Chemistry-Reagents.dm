@@ -18,6 +18,8 @@ datum
 		var/reagent_state = SOLID
 		var/list/data = null
 		var/volume = 0
+		var/dose = 0
+		var/max_dose = 0
 		var/nutriment_factor = 0
 		var/custom_metabolism = REAGENTS_METABOLISM
 		var/overdose = 0
@@ -1589,6 +1591,26 @@ datum
 			description = "A highly addictive stimulant extracted from the tobacco plant."
 			reagent_state = LIQUID
 			color = "#181818" // rgb: 24, 24, 24
+
+			reaction_mob(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				var/smoke_message = pick("You can just feel your lungs dying!", "You feel relaxed.", "You feel calmed.", "You feel the lung cancer forming.", "You feel the money you wasted.", "You feel like a space cowboy.", "You feel rugged.")
+				if(prob(20))
+					M << "<span class='notice'>[smoke_message]</span>"
+				if(prob(50))
+					M.AdjustWeakened(-1)
+					M.make_jittery(-5*REM)
+				if(volume > 30)
+					if(prob(5))
+						M << "<span class='warning'>You feel the urge to smoke more.</span>"
+				if(volume > 40)
+					if(prob(5))
+						M << "<span class='warning'>You feel like you need more nicotine.</span>"
+				if(volume > 35)
+					if(prob(20))
+						M << "You feel like you smoked too much."
+					M.adjustToxLoss(1*REM)
+					M.adjustOxyLoss(1*REM)
 
 		ammonia
 			name = "Ammonia"
