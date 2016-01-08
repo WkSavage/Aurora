@@ -218,3 +218,74 @@
 	hitcost = 2500
 	attack_verb = list("poked")
 	slot_flags = null
+
+/*
+ * High Power Stun Baton
+ */
+
+/obj/item/weapon/melee/baton/high
+	name = "high powered stunbaton"
+	desc = "A stun baton for incapacitating people with."
+	icon_state = "stunbaton"
+	item_state = "baton"
+	flags = FPRINT | TABLEPASS
+	slot_flags = SLOT_BELT
+	force = 20
+	sharp = 0
+	edge = 0
+	throwforce = 10
+	w_class = 3
+	hitcost = 1250
+	origin_tech = "combat=2"
+	attack_verb = list("beaten")
+
+/obj/item/weapon/melee/baton/high/attack(mob/M, mob/user)
+	if(status && (CLUMSY in user.mutations) && prob(50))
+		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		user.Weaken(40)
+		deductcharge(hitcost)
+		return
+
+	var/mob/living/carbon/human/H = M
+	if(isrobot(M))
+		..()
+		return
+
+	if(user.a_intent == "hurt")
+		if(!..()) return
+		//H.apply_effect(5, WEAKEN, 0)
+		M.visible_message("<span class='danger'>[M] has been beaten with the [src] by [user]!</span>")
+
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [M.name] ([M.ckey]) with [src.name]</font>"
+		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Beaten by [user.name] ([user.ckey]) with [src.name]</font>"
+		msg_admin_attack("[key_name_admin(user)] beat [key_name_admin(M)] with [src.name] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
+		playsound(loc, "swing_hit", 50, 1, -1)
+	else if(!status)
+		M.visible_message("<span class='warning'>[M] has been prodded with the [src] by [user]. Luckily it was off.</span>")
+		return
+
+	if(status)
+		H.apply_effect(20, STUN, 0)
+		H.apply_effect(20, WEAKEN, 0)
+		H.apply_effect(20, STUTTER, 0)
+		user.lastattacked = M
+		M.lastattacker = user
+		if(isrobot(src.loc))
+			var/mob/living/silicon/robot/R = src.loc
+			if(R && R.cell)
+				R.cell.use(50)
+		else
+			deductcharge(hitcost)
+		M.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
+
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [M.name] ([M.ckey]) with [src.name]</font>"
+		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
+		msg_admin_attack("[key_name_admin(user)] stunned [key_name_admin(M)] with [src.name] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>")
+
+		playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
+		if(bcell && bcell.charge < hitcost)
+			status = 0
+			update_icon()
+
+	add_fingerprint(user)
