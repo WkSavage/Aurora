@@ -192,6 +192,14 @@
 	freerange = 1
 	keyslot2 = new /obj/item/device/encryptionkey/ert
 
+/obj/item/device/radio/headset/ccomand
+	name = "Central Command Officer headset"
+	desc = "The headset of the boss's boss. Channels are as follows: :h - Response Team :c - command, :s - security, :e - engineering, :d - mining, :q - cargo, :m - medical, :n - science."
+	icon_state = "com_headset"
+	item_state = "headset"
+	freerange = 1
+	keyslot2 = new /obj/item/device/encryptionkey/ert
+
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)

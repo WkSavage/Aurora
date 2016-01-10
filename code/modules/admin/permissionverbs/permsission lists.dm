@@ -5,10 +5,6 @@ var/list/admin_verbs_default = list(
 	)
 
 var/list/admin_verbs_admin = list(
-//	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
-//	/client/proc/sendmob,				/*sends a mob somewhere*/ -Removed due to it needing two sorting procs to work, which were executed every time an admin right-clicked. ~Errorage
-//	/client/proc/toggle_hear_deadcast,	/*toggles whether we hear deadchat*/
-//	/client/proc/deadchat				/*toggles deadchat on/off*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
 	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
 	/datum/admins/proc/PlayerNotes,
@@ -27,6 +23,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
 	/datum/admins/proc/view_atk_log,	/*shows the server combat-log, doesn't do anything presently*/
 	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+	/client/proc/FRules,				//Shows Player the Rules. By Force!
 	/client/proc/admin_call_shuttle,	/*allows us to call the emergency shuttle*/
 	/client/proc/admin_cancel_shuttle,	/*allows us to cancel the emergency shuttle, sending it back to centcomm*/
 	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
@@ -89,13 +86,15 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_view_range,		/*changes how far we can see*/
 	/client/proc/toggle_visibily,
 	/client/proc/secrets,
-	/client/proc/set_ooc
+	/client/proc/set_ooc,
+	/client/proc/forceshuttles
 )
 
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
-	/client/proc/warning_panel
+	/client/proc/warning_panel,
+	/client/proc/cmd_manual_ban // Experimental
 	)
 
 var/list/admin_verbs_sounds = list(
@@ -228,8 +227,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/debug_controller,
 	/client/proc/debug_variables,
 	/client/proc/enable_debug_verbs,
-//	/client/proc/eventHost_grant,
-//	/client/proc/eventHost_revoke,
 	/client/proc/fillspace,
 	/client/proc/getruntimelog,
 	/client/proc/hide_activity,
@@ -241,6 +238,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/remake_distribution_map,
 	/client/proc/ZASSettings,
+	/client/proc/clean
 	)
 
 var/list/admin_verbs_possess = list(
@@ -281,7 +279,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
-	/client/proc/toggleprayers
+	/client/proc/toggleprayers,
+	/client/proc/cmd_admin_dress
 )
 
 //verbs which can be hidden - needs work

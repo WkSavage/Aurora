@@ -535,6 +535,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	//log_admin("[key_name(src)] has alienized [M.key].")
 	var/list/dresspacks = list(
+		"ccia",
+		"ntia",
 		"strip",
 		"standard space gear",
 		"tournament standard red",
@@ -777,6 +779,84 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.access = get_all_accesses()
 			W.access += get_all_centcom_access()
 			W.assignment = "NanoTrasen Navy Representative"
+			W.registered_name = M.real_name
+			M.equip_if_possible(W, slot_wear_id)
+
+		if("ccia")
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/ccia(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
+			M.equip_if_possible(new /obj/item/device/radio/headset/ccomand(M), slot_l_ear)
+			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/officer(M), slot_head)
+
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Central Command Internal Affairs"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+
+			M.equip_if_possible(pda, slot_r_store)
+			M.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(M), slot_l_store)
+			M.equip_if_possible(new /obj/item/weapon/gun/energy(M), slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.icon_state = "centcom"
+			W.item_state = "id_inv"
+			W.access = get_all_accesses()
+			W.access += get_all_centcom_access()
+			W.assignment = "Central command Internal Affairs"
+			W.registered_name = M.real_name
+			M.equip_if_possible(W, slot_wear_id)
+
+		if("ccia")
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/ccia(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
+			M.equip_if_possible(new /obj/item/device/radio/headset/ccomand(M), slot_l_ear)
+			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/ccia(M), slot_head)
+
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Central Command Internal Affairs"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+
+			M.equip_if_possible(pda, slot_r_store)
+			M.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(M), slot_l_store)
+			M.equip_if_possible(new /obj/item/weapon/gun/energy(M), slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.icon_state = "centcom"
+			W.item_state = "id_inv"
+			W.access = get_all_accesses()
+			W.access += get_all_centcom_access()
+			W.assignment = "Central Command Internal Affairs"
+			W.registered_name = M.real_name
+			M.equip_if_possible(W, slot_wear_id)
+
+		if("ntia")
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/ntia(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
+			M.equip_if_possible(new /obj/item/device/radio/headset/ccomand(M), slot_l_ear)
+			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/ntia(M), slot_head)
+
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "NanoTrasen Internal Affairs"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+
+			M.equip_if_possible(pda, slot_r_store)
+			M.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(M), slot_l_store)
+			M.equip_if_possible(new /obj/item/weapon/gun/energy(M), slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.icon_state = "centcom"
+			W.item_state = "id_inv"
+			W.access = get_all_accesses()
+			W.access += get_all_centcom_access()
+			W.assignment = "NanaTrasen Internal Affairs"
 			W.registered_name = M.real_name
 			M.equip_if_possible(W, slot_wear_id)
 

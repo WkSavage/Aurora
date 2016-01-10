@@ -65,7 +65,6 @@
 		process(loc, what)
 			..()
 
-
 		slime
 			process(loc, what)
 				var/mob/living/carbon/slime/S = what
