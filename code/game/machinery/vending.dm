@@ -795,11 +795,17 @@
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4)
-	contraband = list(/obj/item/weapon/lighter/zippo = 4)
+	products = list(/obj/item/weapon/storage/fancy/cigarettes/dromedaryco = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_syndicate = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_uplift = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robust = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_robustgold = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_carp = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_midori = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_shadyjims = 5,/obj/item/weapon/storage/fancy/cigarettes/kanser_sticks = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/holy_smokes = 5,/obj/item/weapon/storage/fancy/cigarettes/lho_sticks = 5,
+					/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4,/obj/item/weapon/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2,  /obj/item/weapon/storage/fancy/cigars = 4)
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/lighter/random = 2)
-
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes/dromedaryco = 5,/obj/item/weapon/storage/fancy/cigarettes/cigpack_syndicate = 15,/obj/item/weapon/storage/fancy/cigarettes/cigpack_uplift = 10,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robust = 10,/obj/item/weapon/storage/fancy/cigarettes/cigpack_robustgold = 20,/obj/item/weapon/storage/fancy/cigarettes/cigpack_carp = 10,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_midori = 10,/obj/item/weapon/storage/fancy/cigarettes/cigpack_shadyjims = 10,/obj/item/weapon/storage/fancy/cigarettes/kanser_sticks = 10,
+					/obj/item/weapon/storage/fancy/cigarettes/holy_smokes = 12,/obj/item/weapon/storage/fancy/cigarettes/lho_sticks = 12,
+					/obj/item/weapon/storage/box/matches = 2,/obj/item/weapon/lighter/random = 4,/obj/item/weapon/lighter/zippo = 25)
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
