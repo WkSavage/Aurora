@@ -1,5 +1,3 @@
-
-
 /obj/item/clothing/head/centhat
 	name = "\improper CentComm. hat"
 	icon_state = "centcom"
@@ -53,13 +51,6 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish"
 	icon_state = "hasturhood"
-	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
-
-/obj/item/clothing/head/cloak
-	name = "old cloak"
-	desc = "Some head-wrapping that doubles as a cape.. Looks like it used to be a flag or something."
-	icon = 'icons/unsortedicons.dmi'
-	icon_state = "Kayodecloak"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 
 /obj/item/clothing/head/nursehat

@@ -1,7 +1,6 @@
 #define RULES_FILE "config/rules.html"
-
 /client/proc/FRules(mob/living/M as mob in mob_list)
-	set category = "Special Verbs"
+	set category = "Admin"
 	set name = "Force Rules"
 	if(!holder)
 		src << "Only administrators may use this command."

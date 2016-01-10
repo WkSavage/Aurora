@@ -1,6 +1,6 @@
 /client/proc/cmd_manual_ban()
 	set name = "Manual Ban"
-	set category = "Special Verbs"
+	set category = "Admin"
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
@@ -38,16 +38,16 @@
 				del(M.client)
 				del(M)
 			else
-	if("No")
-		var/reason = input(usr,"Reason?","reason","Griefer") as text
-		if(!reason)
-			return
-		AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
-		M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
-		M << "\red This is a permanent ban."
-		M << "\red To try to resolve this matter head to http://ss13.donglabs.com/forum/"
-		log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
-		message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
-		world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=perma&server=[replacetext(config.server_name, "#", "")]")
-		del(M.client)
-		del(M)
+		if("No")
+			var/reason = input(usr,"Reason?","reason","Griefer") as text
+			if(!reason)
+				return
+			AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
+			M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
+			M << "\red This is a permanent ban."
+			M << "\red To try to resolve this matter head to http://ss13.donglabs.com/forum/"
+			log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
+			message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
+			world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=perma&server=[replacetext(config.server_name, "#", "")]")
+			del(M.client)
+			del(M)
