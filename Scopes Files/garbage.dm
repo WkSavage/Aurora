@@ -26,7 +26,7 @@ var/datum/controller/garbage_collector/garbage = new()
 
 /datum/controller/garbage_collector/proc/process()
 	dels = 0
-	var/time_to_kill = world.time - GC_COLLECTION_TIMEOUT // Anything del() but not GC'd BEFORE this time needs to be manually del()
+	var/time_to_kill = world.time - GC_COLLECTION_TIMEOUT // Anything qdel() but not GC'd BEFORE this time needs to be manually del()
 	var/checkRemain = GC_DEL_CHECK_PER_TICK
 	while(destroyed.len && --checkRemain >= 0)
 		if(dels > GC_FORCE_DEL_PER_TICK)
@@ -40,7 +40,7 @@ var/datum/controller/garbage_collector/garbage = new()
 		var/atom/A = locate(refID)
 //		testing("GC: [refID] old enough to test: GCd_at_time: [GCd_at_time] time_to_kill: [time_to_kill] current: [world.time]")
 		if(A && A.gc_destroyed == GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
-			// Something's still referring to the del'd object.  Kill it.
+			// Something's still referring to the qdel'd object.  Kill it.
 			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
 			logging["[A.type]"]++
 			del(A)
@@ -51,11 +51,11 @@ var/datum/controller/garbage_collector/garbage = new()
 
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
-/proc/del(var/datum/A)
+/proc/qdel(var/datum/A)
 	if(!A)
 		return
 	if(!istype(A))
-		//warning("del() passed object of type [A.type]. del() can only handle /datum types.")
+		//warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
 		del(A)
 		if(garbage)
 			garbage.dels++
