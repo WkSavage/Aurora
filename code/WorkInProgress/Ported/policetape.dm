@@ -26,7 +26,7 @@
 
 /obj/item/tape/police
 	name = "police tape"
-	desc = "A length of police tape.  Do not cross."
+	desc = "A length of police tape. Do not cross."
 	req_access = list(access_security,access_forensics)
 	icon_base = "police"
 
