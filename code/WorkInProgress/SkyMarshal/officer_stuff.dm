@@ -7,6 +7,18 @@
 	icon_state = "centcomofficerberet"
 	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/head/beret/centcom/ccia
+	name = "officers beret"
+	desc = "A black beret adorned with the CCIA logo on the front. It seems quite fancy."
+	icon_state = "centcomofficerberet"
+	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/head/beret/centcom/ntia
+	name = "officers beret"
+	desc = "A black beret adorned with the NTIA logo on the front. It seems quite fancy, almost too fancy."
+	icon_state = "centcomofficerberet"
+	flags = FPRINT | TABLEPASS
+
 /obj/item/clothing/head/beret/centcom/captain
 	name = "captains beret"
 	desc = "A white beret adorned with the shield—a cobalt kite shield with an engraved sword—of the NanoTrasen security forces, worn only by those captaining a vessel of the NanoTrasen Navy."
@@ -19,7 +31,7 @@
 	icon_state = "laceups"
 
 /obj/item/clothing/under/rank/centcom/representative
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Ensign\" and bears \"N.C.V. Fearless CV-286\" on the left shounder."
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Ensign\" and bears \"N.C.V. Malcore Central Comman\" on the left shounder."
 	name = "\improper NanoTrasen Navy Uniform"
 	icon_state = "officer"
 	item_state = "g_suit"
@@ -27,7 +39,7 @@
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom/officer
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Lieutenant Commander\" and bears \"N.C.V. Fearless CV-286\" on the left shounder."
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Lieutenant Commander\" and bears \"N.C.V. Malcore Central Comman\" on the left shounder."
 	name = "\improper NanoTrasen Officers Uniform"
 	icon_state = "officer"
 	item_state = "g_suit"
@@ -35,9 +47,25 @@
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom/captain
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain\" and bears \"N.C.V. Fearless CV-286\" on the left shounder."
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain\" and bears \"N.C.V. Malcore Central Comman\" on the left shounder."
 	name = "\improper NanoTrasen Captains Uniform"
 	icon_state = "centcom"
 	item_state = "dg_suit"
 	item_color = "centcom"
+	displays_id = 0
+
+/obj/item/clothing/under/rank/centcom/ccia
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Central Command Internal Affairs\" and bears \"N.C.V. Malcore Central Comman\" on the left shounder."
+	name = "\improper Central Command Internal Affairs Uniform"
+	icon_state = "officer"
+	item_state = "g_suit"
+	item_color = "officer"
+	displays_id = 0
+
+/obj/item/clothing/under/rank/centcom/ntia
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"NanoTrasen Internal Affairs\" and bears \"N.C.V. Malcore Central Comman\" on the left shounder."
+	name = "\improper NanoTrasen Internal Affairs Uniform"
+	icon_state = "officer"
+	item_state = "g_suit"
+	item_color = "officer"
 	displays_id = 0
