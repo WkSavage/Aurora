@@ -39,7 +39,6 @@
 
 /obj/item/clothing/glasses/meson/New()
 	..()
-	overlay = global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -62,7 +61,6 @@
 
 /obj/item/clothing/glasses/night/New()
 	..()
-	overlay = global_hud.nvg
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
