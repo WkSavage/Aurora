@@ -1,27 +1,12 @@
-/*
-	Okay so my last effort to have a central BIOS function was interesting
-	but completely unmaintainable, I have scrapped it.
+/obj/machinery/computer3 // interactable(user): performs all standard sanity checks. Call in topic() and interact().
 
-	The parts that were actually useful will be put here in functions instead.
-	If we want a central bios function we can add one that just indexes them.
-	That should at least allow sensible debugging.
-*/
-
-/obj/machinery/computer3
-
-	/*
-		interactable(user): performs all standard sanity checks
-		Call in topic() and interact().
-	*/
 	proc/interactable(var/mob/user)
 		if( !src || !user || stat || user.stat || user.lying || user.blinded )
 			return 0
 		if(!program)
 			return 0
-
 		if(!istype(loc,/turf) || !istype(user.loc,/turf)) // todo handheld maybe
 			return 0
-
 		if(istype(user,/mob/living/silicon))
 			if(!program.ai_allowed)
 				user << "\blue You are forbidden from accessing this program."
@@ -50,11 +35,10 @@
 		user.set_machine(src)
 		return 1
 
-	/*
-		Deduplicates an item list and gives you range and direction.
+/*		Deduplicates an item list and gives you range and direction.
 		This is used for networking so you can determine which of several
-		identically named objects you're referring to.
-	*/
+		identically named objects you're referring to. */
+
 	proc/format_atomlist(var/list/atoms)
 		var/list/output = list()
 		for(var/atom/A in atoms)
@@ -62,9 +46,7 @@
 			output[title] = A
 		return output
 
-	/*
-		This is used by the camera monitoring program to see if you're still in range
-	*/
+// This is used by the camera monitoring program to see if you're still in range
 	check_eye(var/mob/user as mob)
 		if(!interactable(user) || user.machine != src)
 			if(user.machine == src)

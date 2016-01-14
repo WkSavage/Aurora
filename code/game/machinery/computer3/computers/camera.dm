@@ -28,7 +28,6 @@
 		os = program
 		circuit.OS = os
 
-
 /obj/machinery/computer3/security/mining
 	name = "Outpost Cameras"
 	desc = "Used to access the various cameras on the outpost."
