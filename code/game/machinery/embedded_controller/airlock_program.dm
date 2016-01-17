@@ -23,7 +23,7 @@
 	var/state = STATE_IDLE
 	var/target_state = TARGET_NONE
 	var/waiting_ticks = 0
-	var/waiting_ticks_target = 2 // By default, we wait for two ticks before actually signalling the pump to do it's thing. This is to ensure ZAS registers the doors have closed, and we don't leak air.
+	var/waiting_ticks_target = 3 // By default, we wait for two ticks before actually signalling the pump to do it's thing. This is to ensure ZAS registers the doors have closed, and we don't leak air.
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
 	..(M)
