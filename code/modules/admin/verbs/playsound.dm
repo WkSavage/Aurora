@@ -28,7 +28,7 @@
 
 /client/proc/ban_hammer()
 	set category = "Fun"
-	set name = "BanHammer"
+	set name = "Ban Hammer Sound"
 
 	message_admins("[key_name_admin(usr)] has declared Ban Time!", 1)
 	for(var/mob/M in player_list)

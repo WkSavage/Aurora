@@ -1,6 +1,6 @@
 //FOR CUSTOM ITEMS
 
-/obj/item/clothing/custom/suit/rikercoat
+/obj/item/clothing/suit/custom/rikercoat
 	name = "thick leather jacket"
 	desc = "Its a fancy leather jacket."
 	icon = 'icons/misc/assortedicons.dmi'

@@ -50,6 +50,13 @@
 		usr.update_inv_head()	//so our mob-overlays update
 
 
+/obj/item/clothing/head/welding/hivebot
+	name = "welding helmet"
+	desc = "A head-mounted face cover designed to protect the wearer completely from space-arc eye."
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "hivebotwelding"
+	item_state = "hivebotwelding"
+	armor = list(melee = 25, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 10, rad = 10)
 /*
  * Cakehat
  */

@@ -596,11 +596,11 @@ proc/populate_gear_list()
 
 /datum/gear/kaydoecloak
 	display_name = "old cloak"
-	path = /obj/item/clothing/custom/head/cloak
+	path = /obj/item/clothing/head/custom/cloak
 	cost = 1
 
 /datum/gear/rikercoat
 	display_name = "fancy coat"
-	path = /obj/item/clothing/custom/head/cloak
+	path = /obj/item/clothing/suit/custom/rikercoat
 	cost = 1
 

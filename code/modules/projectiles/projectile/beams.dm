@@ -89,7 +89,6 @@ var/list/beam_master = list()
 	flag = "laser"
 	eyeblur = 2
 
-
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"

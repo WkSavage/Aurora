@@ -1,21 +1,25 @@
-/obj/item/projectile/hivebotbullet
+/obj/item/projectile/beam/hivebotbullet
 	damage = 10
-	damage_type = BRUTE
+	damage_type = BURN
+	flag = "laser"
+	eyeblur = 2
+	icon_state = "laser"
 
 /mob/living/simple_animal/hostile/hivebot
 	name = "Hivebot"
 	desc = "A small robot"
 	icon = 'icons/mob/hivebot.dmi'
-	icon_state = "basic"
-	icon_living = "basic"
-	icon_dead = "basic"
+	icon_state = "hivebot"
+	icon_living = "hivebot"
+	icon_dead = "hivebot_gib"
+	icon_gib = "hivebot_gib"
 	health = 15
 	maxHealth = 15
 	melee_damage_lower = 2
 	melee_damage_upper = 3
-	attacktext = "claws"
-	projectilesound = 'sound/weapons/Gunshot.ogg'
-	projectiletype = /obj/item/projectile/hivebotbullet
+	attacktext = "clawed"
+	projectilesound = 'sound/weapons/Laser2.ogg'
+	projectiletype = /obj/item/projectile/beam/hivebotbullet
 	faction = "hivebot"
 	min_oxy = 0
 	max_oxy = 0
@@ -31,7 +35,20 @@
 /mob/living/simple_animal/hostile/hivebot/range
 	name = "Hivebot"
 	desc = "A smallish robot, this one is armed!"
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "rangebot"
+	icon_living = "rangebot"
+	icon_dead = "rangebot_gib"
+	icon_gib = "rangebot_gib"
 	ranged = 1
+
+/mob/living/simple_animal/hostile/hivebot/britbot
+	name = "Hivebot"
+	desc = "A smallish robot, this one is quite stylish!"
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "britbot"
+	icon_living = "britbot"
+	icon_dead = "britbot"
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
@@ -39,10 +56,46 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	name = "Strong Hivebot"
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "juggerbot"
+	icon_living = "juggerbot"
+	icon_dead = "juggerbot_gib"
+	icon_gib = "juggerbot_gib"
 	desc = "A robot, this one is armed and looks tough!"
-	health = 80
-	ranged = 1
+	health = 100
+	ranged = 0
+	melee_damage_lower = 10
+	melee_damage_upper = 10
 
+/mob/living/simple_animal/hostile/hivebot/hivemind
+	name = "Hivemind"
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "hivemind"
+	icon_living = "hivemind"
+	icon_dead = "hivemind_dead"
+	icon_gib = "hivemind_gib"
+	desc = " A squiddly-diddly Hivemind.. Huh, that beak kinda looks scary from a distance."
+	health = 50
+	maxHealth = 50
+	melee_damage_lower = 0.5
+	melee_damage_upper = 1
+	health = 15
+	ranged = 0
+
+/mob/living/simple_animal/hostile/hivemech
+	name = "Hivemech"
+	desc = "A hivemind's mech.. Squiddly-diddly in there looks like they're the one guiding the bots around for the most part."
+	icon = 'icons/mob/hivebot.dmi'
+	icon_state = "Hivemech"
+	icon_living = "Hivemech"
+	icon_dead = "Hivemech"
+	icon_gib = "Hivemech_gib"
+	health = 250
+	maxHealth = 250
+	melee_damage_lower = 10
+	melee_damage_upper = 15
+	attacktext = "spiked"
+	speed = 1.75
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..()
@@ -51,15 +104,18 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
-	del src
+	if(prob(10))
+		new /obj/item/clothing/head/welding/hivebot
+	del(src)
 	return
 
 /mob/living/simple_animal/hostile/hivebot/tele//this still needs work
 	name = "Beacon"
 	desc = "Some odd beacon thing"
 	icon = 'icons/mob/hivebot.dmi'
-	icon_state = "def_radar-off"
-	icon_living = "def_radar-off"
+	icon_state = "spawnbot"
+	icon_living = "spawnbot"
+	icon_gib = "spawnbot_gib"
 	health = 200
 	maxHealth = 200
 	status_flags = 0
@@ -72,7 +128,6 @@
 	var/auto_spawn = 1
 	proc
 		warpbots()
-
 
 	New()
 		..()
