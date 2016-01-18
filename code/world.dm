@@ -7,7 +7,7 @@
 
 
 
-#define RECOMMENDED_VERSION 501
+#define RECOMMENDED_VERSION 507
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -32,12 +32,7 @@
 		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
 
 	callHook("startup")
-	//Emergency Fix
 	load_mods()
-//	if(config.ip_blacklist_enabled)	Should no longer be necessary.
-//		loadBlacklist()
-	//end-emergency fix
-
 	src.update_status()
 
 	. = ..()

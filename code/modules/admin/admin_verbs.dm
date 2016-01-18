@@ -9,6 +9,7 @@
 	feedback_add_details("admin_verb","HMV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
+
 /client/proc/hide_verbs()
 	set name = "Adminverbs - Hide All"
 	set category = "Admin"
@@ -29,9 +30,6 @@
 
 	src << "<span class='interface'>All of your adminverbs are now visible.</span>"
 	feedback_add_details("admin_verb","TAVVS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
-
 
 
 /client/proc/admin_ghost()

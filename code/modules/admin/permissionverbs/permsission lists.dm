@@ -48,6 +48,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/cmd_admin_unwind,
 	/client/proc/cmd_admin_wind,
+	/client/proc/cmd_admin_wind_all,
+	/client/proc/cmd_admin_unwind_all,
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/cmd_duty_say,
 	/client/proc/cmd_mentor_check_new_players,

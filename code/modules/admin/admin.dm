@@ -1186,17 +1186,6 @@ var/global/floorIsLava = 0
 		if(3)
 			return "<b>[key_name(C, link, name)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;admindibs=\ref[M]'>DIBS</A>) (<A HREF='?_src_=holder;adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>)</b>"
 
-
-
-//
-//
-//ALL DONE
-//*********************************************************************************************************
-//TO-DO:
-//
-//
-
-
 /**********************Administration Shuttle**************************/
 
 var/admin_shuttle_location = 0 // 0 = centcom 13, 1 = station
@@ -1264,7 +1253,6 @@ proc/move_alien_ship()
 		src << "Only moderators or higher may use this command."
 		return */ // I think this is unnecessary. - Dalekfodder
 
-
 	if(alert("Wind [M]?",,"Yes","No")!="Yes")
 		return
 
@@ -1286,4 +1274,33 @@ proc/move_alien_ship()
 	log_admin("[key_name(usr)] unwinded [key_name(M)]!")
 	message_admins("[key_name_admin(usr)] unwinded [key_name_admin(M)]!", 1)
 	message_mods("[key_name_admin(usr)] unwinded [key_name_admin(M)]!", 1)
+	return
+
+/client/proc/cmd_admin_wind_all(var/mob/M in player_list)
+	set category = null
+	set name = "Wind All Players"
+	/*if(!holder)
+		src << "Only moderators or higher may use this command."
+		return */ // I think this is unnecessary. - Dalekfodder
+
+	message_admins("[key_name_admin(usr)] HAS FROZEN ALL PLAYERS!", 1)
+	if(alert("WIND ALL?",,"Yes","No")!="Yes")
+		return
+
+	M.SetWeakened(200)
+
+	log_admin("[key_name(usr)] winded all players!")
+	message_admins("[key_name_admin(usr)] winded all players!", 1)
+	message_mods("[key_name_admin(usr)] winded all players!!")
+	return
+
+/client/proc/cmd_admin_unwind_all(var/mob/M in player_list)
+	set category = null
+	set name = "Unwind All Players"
+
+	M.SetWeakened(0)
+
+	log_admin("[key_name(usr)] unwinded all players!")
+	message_admins("[key_name_admin(usr)] unwinded all players!", 1)
+	message_mods("[key_name_admin(usr)] unwinded all players!", 1)
 	return
