@@ -27,6 +27,14 @@
 	flags = FPRINT|TABLEPASS
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/head/Kayodecloak
+	name = "ragged cloak"
+	desc = "It's an old, dirty head-wrap."
+	icon_state = "Kayodecloak"
+	item_state = "Kayodecloak"
+	flags = FPRINT|TABLEPASS
+	siemens_coefficient = 0.9
+
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon_state = "redcoat"
